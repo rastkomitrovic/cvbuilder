@@ -42,13 +42,34 @@ CREATE TABLE `users` (
                          CONSTRAINT `fk_user_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+/* rastkomitrovic96 pass */
+insert into users(username, password, first_name, last_name, email, index_number, activated, role_id) values ('rastko','$2a$12$CTHwiUMwN9.yc4th6ieXmeIkG0I4upyPjJcTW7Z.vS.YlLNINQOo.', 'Rastko', 'Mitrovic', 'rastkomitrovic@gmail.com','3718/21',1, (SELECT id from role where name='SUPER_ADMIN'));
+/* peraperic96 pass */
+insert into users(username, password, first_name, last_name, email, index_number, activated, role_id) values ('pera','$2a$12$/SbtE1zUh9XfSdaPWeOsT.tRwE6noOaHIyID/WnAwiM.HuZtVc/xy', 'Pera', 'Peric', 'peraperic@gmail.com','3719/21',1, (SELECT id from role where name='ADMIN'));
+/* mikamikic96 pass */
+insert into users(username, password, first_name, last_name, email, index_number, activated, role_id) values ('mika','$2a$12$olJQvQPSM6PoEPKBaoPoSOJDwluYeU6SJaCmZUdO1ADTlZzx/8Z8a', 'Mika', 'Mikic', 'mikamikic@gmail.com','3720/21',0, (SELECT id from role where name='USER'));
+/* zikazikic96 pass */
+insert into users(username, password, first_name, last_name, email, index_number, activated, role_id) values ('zika','$2a$12$XdmdTpxsw9sJOwv8fbuEWubjxwTmdmzU.m89En0ogt8PcHhvPiG/e', 'Zika', 'Zikic', 'zikazikic@gmail.com','3721/21',0, (SELECT id from role where name='ADMIN'));
+
+
 CREATE TABLE `sectionfieldtype` (
                                     `id` bigint(20) NOT NULL AUTO_INCREMENT,
                                     `name` varchar(255) NOT NULL,
+                                    `key_value` varchar(255) NOT NULL,
                                     `description` varchar(255) NULL,
                                     PRIMARY KEY (`id`),
-                                    UNIQUE KEY `UNIQUE_SECTIONFIELDTYPE_NAME` (`name`)
+                                    UNIQUE KEY `UNIQUE_SECTIONFIELDTYPE_NAME` (`name`),
+                                    UNIQUE KEY `UNIQUE_SECTIONFIELDTYPE_KEY` (`key_value`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+insert into sectionfieldtype(name, key_value, description)  values ('Datum','DATE','Datum bez vremena');
+insert into sectionfieldtype(name, key_value, description)  values ('Datum i vreme','DATE_TIME','Datum sa vremenom');
+insert into sectionfieldtype(name, key_value, description)  values ('Kratak tekst','SHORT_TEXT','Kratko tekstualno polje');
+insert into sectionfieldtype(name, key_value, description)  values ('Dugacak tekst','LONG_TEXT','Dugacko tekstualno polje namenjeno za dugacke sekcije');
+insert into sectionfieldtype(name, key_value)  values ('Celi broj','INTEGER');
+insert into sectionfieldtype(name, key_value)  values ('Decimalni broj','DOUBLE');
+insert into sectionfieldtype(name, key_value, description)  values ('Slika','IMAGE','Slika(maksimalna velicina 15 MB)');
+insert into sectionfieldtype(name, key_value, description)  values ('Fajl','FILE','Fajl(maksimalna velicina 15 MB)');
 
 CREATE TABLE `sectionfield` (
                                 `id` bigint(20) NOT NULL AUTO_INCREMENT,
