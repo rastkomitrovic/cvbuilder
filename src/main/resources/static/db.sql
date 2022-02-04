@@ -173,7 +173,7 @@ CREATE TABLE `cv` (
                       `description` varchar(255) NULL,
                       `date_created` datetime NOT NULL,
                       `date_edited` datetime NULL,
-                      `template_id` bigint(20) NOT NULL,
+                      `template_id` bigint(20) NULL,
                       `user_id` bigint(20) NOT NULL,
                       PRIMARY KEY (`id`),
                       KEY `fk_cv_user` (`user_id`),
@@ -185,7 +185,7 @@ CREATE TABLE `cvsection` (
                              `cv_id` bigint(20) NOT NULL,
                              `section_id` bigint(20) NOT NULL,
                              `order_number` int NOT NULL,
-                             PRIMARY KEY (`id`,`cv_id`, `section_id`),
+                             PRIMARY KEY (`id`),
                              KEY `fk_cvsection_cv` (`cv_id`),
                              KEY `fk_cvsection_section` (`section_id`),
                              CONSTRAINT `fk_cvsection_cv` FOREIGN KEY (`cv_id`) REFERENCES `cv` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -194,8 +194,7 @@ CREATE TABLE `cvsection` (
 
 
 CREATE TABLE `cvsectionsectionfield` (
-                                         `cv_id` bigint(20) NOT NULL,
-                                         `section_id` bigint(20) NOT NULL,
+                                         `cvsection_id` bigint(20) NOT NULL,
                                          `section_field_id` bigint(20) NOT NULL,
                                          `order_number` int NOT NULL,
                                          `string_value` varchar(10000) NULL,
@@ -203,11 +202,9 @@ CREATE TABLE `cvsectionsectionfield` (
                                          `double_value` double NULL,
                                          `date_value` datetime NULL,
                                          `blob_value` mediumblob NULL,
-                                         PRIMARY KEY (`cv_id`, `section_id`, `section_field_id`),
-                                         KEY `fk_cvsectionsectionfield_cvsection_cv_id` (`cv_id`),
-                                         KEY `fk_cvsectionsectionfield_cvsection_section_id` (`section_id`),
+                                         PRIMARY KEY (`cvsection_id`, `section_field_id`),
+                                         KEY `fk_cvsectionsectionfield_cvsection` (`cvsection_id`),
                                          KEY `fk_cvsectionsectionfield_sectionfield` (`section_field_id`),
-                                         CONSTRAINT `fk_cvsectionsectionfield_cvsection_cv_id` FOREIGN KEY (`cv_id`) REFERENCES `cvsection` (`cv_id`) ON UPDATE CASCADE ON DELETE CASCADE,
-                                         CONSTRAINT `fk_cvsectionsectionfield_cvsection_section_id` FOREIGN KEY (`section_id`) REFERENCES `cvsection` (`section_id`) ON UPDATE CASCADE ON DELETE CASCADE ,
+                                         CONSTRAINT `fk_cvsectionsectionfield_cvsection` FOREIGN KEY (`cvsection_id`) REFERENCES `cvsection` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
                                          CONSTRAINT `fk_cvsectionsectionfield_sectionfield` FOREIGN KEY (`section_field_id`) REFERENCES `sectionfield` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

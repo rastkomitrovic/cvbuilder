@@ -1,16 +1,19 @@
 package com.fon.bg.ac.rs.cvbuilder.entity;
 
+
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name = "sectionfieldtype")
-public class SectionFieldType {
+@Table(name = "section")
+public class Section {
 
+    @Column(name = "id", nullable = false, unique = true)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = true)
     private Long id;
+
 
     @Column(name = "name", nullable = false, unique = true)
     private String name;
@@ -18,14 +21,18 @@ public class SectionFieldType {
     @Column(name = "description", nullable = true)
     private String description;
 
-    public SectionFieldType() {
+    @OneToMany(mappedBy = "sectionSectionFieldEmbeddedId.section", fetch = FetchType.LAZY)
+    private Set<SectionSectionField> sectionSectionFields;
+
+    public Section() {
 
     }
 
-    public SectionFieldType(Long id, String name, String description) {
+    public Section(Long id, String name, String description, Set<SectionSectionField> sectionSectionFields) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.sectionSectionFields = sectionSectionFields;
     }
 
     public Long getId() {
@@ -52,12 +59,20 @@ public class SectionFieldType {
         this.description = description;
     }
 
+    public Set<SectionSectionField> getSectionSectionFields() {
+        return sectionSectionFields;
+    }
+
+    public void setSectionSectionFields(Set<SectionSectionField> sectionSectionFields) {
+        this.sectionSectionFields = sectionSectionFields;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof SectionFieldType)) return false;
-        SectionFieldType that = (SectionFieldType) o;
-        return Objects.equals(id, that.id);
+        if (o == null || getClass() != o.getClass()) return false;
+        Section section = (Section) o;
+        return Objects.equals(id, section.id);
     }
 
 }
