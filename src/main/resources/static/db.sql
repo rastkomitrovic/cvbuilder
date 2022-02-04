@@ -64,12 +64,14 @@ CREATE TABLE `sectionfieldtype` (
 
 insert into sectionfieldtype(name, key_value, description)  values ('Datum','DATE','Datum bez vremena');
 insert into sectionfieldtype(name, key_value, description)  values ('Datum i vreme','DATE_TIME','Datum sa vremenom');
-insert into sectionfieldtype(name, key_value, description)  values ('Kratak tekst','SHORT_TEXT','Kratko tekstualno polje');
-insert into sectionfieldtype(name, key_value, description)  values ('Dugacak tekst','LONG_TEXT','Dugacko tekstualno polje namenjeno za dugacke sekcije');
+insert into sectionfieldtype(name, key_value, description)  values ('Kratak tekst','SHORT_TEXT','Kratko tekstualno polje (maksimalno 100 karaktera)');
+insert into sectionfieldtype(name, key_value, description)  values ('Dugacak tekst','LONG_TEXT','Dugacko tekstualno polje namenjeno za dugacke sekcije (maksimalno 10000 karaktera)');
+insert into sectionfieldtype(name, key_value, description)  values ('Email','EMAIL','Email adresa u xyz@domain formatu');
+insert into sectionfieldtype(name, key_value, description)  values ('Telefon','PHONE','Broj telefona u +{kod drzave}{broj telefona} formatu');
 insert into sectionfieldtype(name, key_value)  values ('Celi broj','INTEGER');
 insert into sectionfieldtype(name, key_value)  values ('Decimalni broj','DOUBLE');
-insert into sectionfieldtype(name, key_value, description)  values ('Slika','IMAGE','Slika(maksimalna velicina 15 MB)');
-insert into sectionfieldtype(name, key_value, description)  values ('Fajl','FILE','Fajl(maksimalna velicina 15 MB)');
+insert into sectionfieldtype(name, key_value, description)  values ('Slika','IMAGE','Slika (maksimalna velicina 15 MB)');
+insert into sectionfieldtype(name, key_value, description)  values ('Fajl','FILE','Fajl (maksimalna velicina 15 MB)');
 
 CREATE TABLE `sectionfield` (
                                 `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -82,6 +84,22 @@ CREATE TABLE `sectionfield` (
                                 CONSTRAINT `fk_sectionfield_sectionfieldtype` FOREIGN KEY (`section_field_type_id`) REFERENCES `sectionfieldtype` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+insert into sectionfield(name, section_field_type_id) values ('Ime', (select id from sectionfieldtype where key_value = 'SHORT_TEXT'));
+insert into sectionfield(name, section_field_type_id) values ('Prezime', (select id from sectionfieldtype where key_value = 'SHORT_TEXT'));
+insert into sectionfield(name, section_field_type_id) values ('Adresa', (select id from sectionfieldtype where key_value = 'SHORT_TEXT'));
+insert into sectionfield(name, section_field_type_id) values ('Grad', (select id from sectionfieldtype where key_value = 'SHORT_TEXT'));
+insert into sectionfield(name, section_field_type_id) values ('Drzava', (select id from sectionfieldtype where key_value = 'SHORT_TEXT'));
+insert into sectionfield(name, section_field_type_id) values ('Nacionalnost', (select id from sectionfieldtype where key_value = 'SHORT_TEXT'));
+insert into sectionfield(name, section_field_type_id) values ('Email', (select id from sectionfieldtype where key_value = 'EMAIL'));
+insert into sectionfield(name, section_field_type_id) values ('Telefon', (select id from sectionfieldtype where key_value = 'PHONE'));
+
+insert into sectionfield(name, section_field_type_id) values ('Kompanija', (select id from sectionfieldtype where key_value = 'SHORT_TEXT'));
+insert into sectionfield(name, section_field_type_id) values ('Datum pocetka angazovanja', (select id from sectionfieldtype where key_value = 'DATE'));
+insert into sectionfield(name, section_field_type_id) values ('Datum zavrsetka angazovanja', (select id from sectionfieldtype where key_value = 'DATE'));
+insert into sectionfield(name, section_field_type_id) values ('Pozicija', (select id from sectionfieldtype where key_value = 'SHORT_TEXT'));
+insert into sectionfield(name, section_field_type_id) values ('Opis posla', (select id from sectionfieldtype where key_value = 'LONG_TEXT'));
+
+
 CREATE TABLE `section` (
                            `id` bigint(20) NOT NULL AUTO_INCREMENT,
                            `name` varchar(255) NOT NULL,
@@ -89,6 +107,9 @@ CREATE TABLE `section` (
                            PRIMARY KEY (`id`),
                            UNIQUE KEY `UNIQUE_SECTION_NAME` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+insert into section(name, description) values ('Osnovne informacije','Osnovne informacije o meni');
+insert into section(name, description) values ('Iskustvo','Prethodna radna iskustva');
 
 CREATE TABLE `sectionsectionfield` (
                                        `section_id` bigint(20) NOT NULL,
@@ -100,6 +121,22 @@ CREATE TABLE `sectionsectionfield` (
                                        CONSTRAINT `fk_sectionsectionfield_section` FOREIGN KEY (`section_id`) REFERENCES `section` (`id`) ON UPDATE CASCADE ON DELETE CASCADE ,
                                        CONSTRAINT `fk_sectionsectionfield_sectionfield` FOREIGN KEY (`section_field_id`) REFERENCES `sectionfield` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+insert into sectionsectionfield(section_id, section_field_id, order_number) values ((select id from section where name = 'Osnovne informacije'),(select id from sectionfield where name = 'Ime'),1);
+insert into sectionsectionfield(section_id, section_field_id, order_number) values ((select id from section where name = 'Osnovne informacije'),(select id from sectionfield where name = 'Prezime'),2);
+insert into sectionsectionfield(section_id, section_field_id, order_number) values ((select id from section where name = 'Osnovne informacije'),(select id from sectionfield where name = 'Adresa'),3);
+insert into sectionsectionfield(section_id, section_field_id, order_number) values ((select id from section where name = 'Osnovne informacije'),(select id from sectionfield where name = 'Grad'),4);
+insert into sectionsectionfield(section_id, section_field_id, order_number) values ((select id from section where name = 'Osnovne informacije'),(select id from sectionfield where name = 'Drzava'),5);
+insert into sectionsectionfield(section_id, section_field_id, order_number) values ((select id from section where name = 'Osnovne informacije'),(select id from sectionfield where name = 'Nacionalnost'),6);
+insert into sectionsectionfield(section_id, section_field_id, order_number) values ((select id from section where name = 'Osnovne informacije'),(select id from sectionfield where name = 'Email'),7);
+insert into sectionsectionfield(section_id, section_field_id, order_number) values ((select id from section where name = 'Osnovne informacije'),(select id from sectionfield where name = 'Telefon'),8);
+
+insert into sectionsectionfield(section_id, section_field_id, order_number) values ((select id from section where name = 'Iskustvo'),(select id from sectionfield where name = 'Kompanija'),1);
+insert into sectionsectionfield(section_id, section_field_id, order_number) values ((select id from section where name = 'Iskustvo'),(select id from sectionfield where name = 'Datum pocetka angazovanja'),2);
+insert into sectionsectionfield(section_id, section_field_id, order_number) values ((select id from section where name = 'Iskustvo'),(select id from sectionfield where name = 'Datum zavrsetka angazovanja'),3);
+insert into sectionsectionfield(section_id, section_field_id, order_number) values ((select id from section where name = 'Iskustvo'),(select id from sectionfield where name = 'Pozicija'),4);
+insert into sectionsectionfield(section_id, section_field_id, order_number) values ((select id from section where name = 'Iskustvo'),(select id from sectionfield where name = 'Opis posla'),5);
+
 
 
 CREATE TABLE `template` (
@@ -113,6 +150,8 @@ CREATE TABLE `template` (
                             CONSTRAINT `fk_template_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+insert into template(name, description, private, user_id) values ('Prvi sablon','Prvi probni sablon',0,(Select id from users where username = 'rastko'));
+
 CREATE TABLE `templatesection` (
                                    `template_id` bigint(20) NOT NULL,
                                    `section_id` bigint(20) NOT NULL,
@@ -123,6 +162,10 @@ CREATE TABLE `templatesection` (
                                    CONSTRAINT `fk_templatesection_template` FOREIGN KEY (`template_id`) REFERENCES `template` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
                                    CONSTRAINT `fk_templatesection_section` FOREIGN KEY (`section_id`) REFERENCES `section` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+insert into templatesection (template_id, section_id, repeatable) values ((select id from template where name = 'Prvi sablon'),(select id from section where name = 'Osnovne informacije'),0);
+insert into templatesection (template_id, section_id, repeatable) values ((select id from template where name = 'Prvi sablon'),(select id from section where name = 'Iskustvo'),1);
+
 
 CREATE TABLE `cv` (
                       `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -138,10 +181,11 @@ CREATE TABLE `cv` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `cvsection` (
+                             `id` bigint(20) NOT NUll,
                              `cv_id` bigint(20) NOT NULL,
                              `section_id` bigint(20) NOT NULL,
                              `order_number` int NOT NULL,
-                             PRIMARY KEY (`cv_id`, `section_id`),
+                             PRIMARY KEY (`id`,`cv_id`, `section_id`),
                              KEY `fk_cvsection_cv` (`cv_id`),
                              KEY `fk_cvsection_section` (`section_id`),
                              CONSTRAINT `fk_cvsection_cv` FOREIGN KEY (`cv_id`) REFERENCES `cv` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
