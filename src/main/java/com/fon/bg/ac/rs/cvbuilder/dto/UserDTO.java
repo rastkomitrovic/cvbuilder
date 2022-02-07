@@ -1,49 +1,32 @@
-package com.fon.bg.ac.rs.cvbuilder.entity;
+package com.fon.bg.ac.rs.cvbuilder.dto;
 
+import java.util.Objects;
 
-import com.fon.bg.ac.rs.cvbuilder.entity.abs.BaseEntity;
+public class UserDTO {
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "users")
-public class User extends BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
-    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
-    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "index_number", nullable = false, unique = true)
     private String indexNumber;
 
-    @Column(name = "activated", nullable = false)
-    private boolean activated;
+    private String activated;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id", nullable = false)
-    private Role role;
+    private RoleDTO role;
 
-    public User(){
+    public UserDTO(){
 
     }
 
-    public User(Long id, String username, String password, String firstName, String lastName, String email, String indexNumber, boolean activated, Role role) {
+    public UserDTO(Long id, String username, String password, String firstName, String lastName, String email, String indexNumber, String activated, RoleDTO role) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -111,27 +94,28 @@ public class User extends BaseEntity {
         this.indexNumber = indexNumber;
     }
 
-    public boolean isActivated() {
+    public String getActivated() {
         return activated;
     }
 
-    public void setActivated(boolean activated) {
+    public void setActivated(String activated) {
         this.activated = activated;
     }
 
-    public Role getRole() {
+    public RoleDTO getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(RoleDTO role) {
         this.role = role;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id.equals(user.id);
+        if (!(o instanceof UserDTO)) return false;
+        UserDTO userDTO = (UserDTO) o;
+        return Objects.equals(id, userDTO.id);
     }
+
 }

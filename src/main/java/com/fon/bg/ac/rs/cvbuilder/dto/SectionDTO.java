@@ -1,33 +1,27 @@
-package com.fon.bg.ac.rs.cvbuilder.entity;
+package com.fon.bg.ac.rs.cvbuilder.dto;
 
-import com.fon.bg.ac.rs.cvbuilder.entity.abs.BaseEntity;
-
-import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
-@Entity
-@Table(name = "sectionfieldtype")
-public class SectionFieldType extends BaseEntity {
+public class SectionDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
-    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @Column(name = "description", nullable = true)
     private String description;
 
-    public SectionFieldType() {
+    private List<SectionSectionFieldDTO> sectionSectionFields;
+
+    public SectionDTO(){
 
     }
 
-    public SectionFieldType(Long id, String name, String description) {
+    public SectionDTO(Long id, String name, String description, List<SectionSectionFieldDTO> sectionSectionFields) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.sectionSectionFields = sectionSectionFields;
     }
 
     public Long getId() {
@@ -54,11 +48,19 @@ public class SectionFieldType extends BaseEntity {
         this.description = description;
     }
 
+    public List<SectionSectionFieldDTO> getSectionSectionFields() {
+        return sectionSectionFields;
+    }
+
+    public void setSectionSectionFields(List<SectionSectionFieldDTO> sectionSectionFields) {
+        this.sectionSectionFields = sectionSectionFields;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof SectionFieldType)) return false;
-        SectionFieldType that = (SectionFieldType) o;
+        if (!(o instanceof SectionDTO)) return false;
+        SectionDTO that = (SectionDTO) o;
         return Objects.equals(id, that.id);
     }
 

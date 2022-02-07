@@ -1,51 +1,32 @@
-package com.fon.bg.ac.rs.cvbuilder.entity;
+package com.fon.bg.ac.rs.cvbuilder.dto;
 
-import com.fon.bg.ac.rs.cvbuilder.entity.abs.BaseEntity;
-
-import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
-@Entity
-@Table(name = "cv")
-public class CV extends BaseEntity {
+public class CVDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
-    @Column(name = "name", nullable = false, unique = false)
     private String name;
 
-    @Column(name = "description", nullable = true)
     private String description;
 
-    @Basic
-    @Column(name = "date_created", nullable = false)
     private LocalDateTime dateCreated;
 
-    @Basic
-    @Column(name = "date_edited", nullable = true)
     private LocalDateTime dateEdited;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "template_id", nullable = true)
-    private Template template;
+    private TemplateDTO template;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private UserDTO user;
 
-    @OneToMany(mappedBy = "cv", fetch = FetchType.LAZY)
-    private Set<CVSection> cvSections;
+    private List<CVSectionDTO> cvSections;
 
-    public CV(){
+    public CVDTO(){
 
     }
 
-    public CV(Long id, String name, String description, LocalDateTime dateCreated, LocalDateTime dateEdited, Template template, User user, Set<CVSection> cvSections) {
+    public CVDTO(Long id, String name, String description, LocalDateTime dateCreated, LocalDateTime dateEdited, TemplateDTO template, UserDTO user, List<CVSectionDTO> cvSections) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -96,40 +77,36 @@ public class CV extends BaseEntity {
         this.dateEdited = dateEdited;
     }
 
-    public Template getTemplate() {
+    public TemplateDTO getTemplate() {
         return template;
     }
 
-    public void setTemplate(Template template) {
+    public void setTemplate(TemplateDTO template) {
         this.template = template;
     }
 
-    public User getUser() {
+    public UserDTO getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
 
-    public Set<CVSection> getCvSections() {
+    public List<CVSectionDTO> getCvSections() {
         return cvSections;
     }
 
-    public void setCvSections(Set<CVSection> cvSections) {
+    public void setCvSections(List<CVSectionDTO> cvSections) {
         this.cvSections = cvSections;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof CV)) return false;
-        CV cv = (CV) o;
-        return Objects.equals(id, cv.id);
+        if (!(o instanceof CVDTO)) return false;
+        CVDTO cvdto = (CVDTO) o;
+        return Objects.equals(id, cvdto.id);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

@@ -1,13 +1,15 @@
 package com.fon.bg.ac.rs.cvbuilder.entity;
 
 
+import com.fon.bg.ac.rs.cvbuilder.entity.abs.BaseEntity;
+
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "section")
-public class Section {
+public class Section extends BaseEntity {
 
     @Column(name = "id", nullable = false, unique = true)
     @Id

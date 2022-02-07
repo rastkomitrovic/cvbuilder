@@ -1,8 +1,10 @@
 package com.fon.bg.ac.rs.cvbuilder.entity;
 
+import com.fon.bg.ac.rs.cvbuilder.entity.abs.BaseEntity;
 import com.fon.bg.ac.rs.cvbuilder.entity.embedded.CVSectionSectionFieldEmbeddedId;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -14,7 +16,7 @@ import java.util.Objects;
                 @AssociationOverride(name = "cvSectionSectionFieldEmbeddedId.sectionField", joinColumns = @JoinColumn(name = "section_field_id", nullable = false))
         }
 )
-public class CVSectionSectionField {
+public class CVSectionSectionField extends BaseEntity {
 
     @EmbeddedId
     private CVSectionSectionFieldEmbeddedId cvSectionSectionFieldEmbeddedId;
@@ -33,7 +35,11 @@ public class CVSectionSectionField {
 
     @Basic
     @Column(name = "date_value",nullable = true)
-    private LocalDateTime dateValue;
+    private LocalDate dateValue;
+
+    @Basic
+    @Column(name = "date_time_value", nullable = true)
+    private LocalDateTime dateTimeValue;
 
     @Lob
     @Column(name = "blob_value", columnDefinition = "BLOB")
@@ -43,13 +49,14 @@ public class CVSectionSectionField {
 
     }
 
-    public CVSectionSectionField(CVSectionSectionFieldEmbeddedId cvSectionSectionFieldEmbeddedId, Integer orderNumber, String stringValue, Long numberValue, Double doubleValue, LocalDateTime dateValue, byte[] blobValue) {
+    public CVSectionSectionField(CVSectionSectionFieldEmbeddedId cvSectionSectionFieldEmbeddedId, Integer orderNumber, String stringValue, Long numberValue, Double doubleValue, LocalDate dateValue, LocalDateTime dateTimeValue, byte[] blobValue) {
         this.cvSectionSectionFieldEmbeddedId = cvSectionSectionFieldEmbeddedId;
         this.orderNumber = orderNumber;
         this.stringValue = stringValue;
         this.numberValue = numberValue;
         this.doubleValue = doubleValue;
         this.dateValue = dateValue;
+        this.dateTimeValue = dateTimeValue;
         this.blobValue = blobValue;
     }
 
@@ -93,12 +100,20 @@ public class CVSectionSectionField {
         this.doubleValue = doubleValue;
     }
 
-    public LocalDateTime getDateValue() {
+    public LocalDate getDateValue() {
         return dateValue;
     }
 
-    public void setDateValue(LocalDateTime dateValue) {
+    public void setDateValue(LocalDate dateValue) {
         this.dateValue = dateValue;
+    }
+
+    public LocalDateTime getDateTimeValue() {
+        return dateTimeValue;
+    }
+
+    public void setDateTimeValue(LocalDateTime dateTimeValue) {
+        this.dateTimeValue = dateTimeValue;
     }
 
     public byte[] getBlobValue() {

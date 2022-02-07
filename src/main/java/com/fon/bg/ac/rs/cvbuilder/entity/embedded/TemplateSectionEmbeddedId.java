@@ -2,6 +2,7 @@ package com.fon.bg.ac.rs.cvbuilder.entity.embedded;
 
 import com.fon.bg.ac.rs.cvbuilder.entity.Section;
 import com.fon.bg.ac.rs.cvbuilder.entity.Template;
+import com.fon.bg.ac.rs.cvbuilder.entity.abs.BaseEntity;
 
 import javax.persistence.Embeddable;
 import javax.persistence.FetchType;
@@ -11,7 +12,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class TemplateSectionEmbeddedId implements Serializable {
+public class TemplateSectionEmbeddedId extends BaseEntity implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "template_id", nullable = false)

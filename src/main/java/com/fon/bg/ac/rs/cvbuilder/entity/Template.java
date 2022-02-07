@@ -1,12 +1,14 @@
 package com.fon.bg.ac.rs.cvbuilder.entity;
 
+import com.fon.bg.ac.rs.cvbuilder.entity.abs.BaseEntity;
+
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "template")
-public class Template {
+public class Template extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

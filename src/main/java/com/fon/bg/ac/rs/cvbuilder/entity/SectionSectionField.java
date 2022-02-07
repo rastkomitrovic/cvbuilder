@@ -1,5 +1,6 @@
 package com.fon.bg.ac.rs.cvbuilder.entity;
 
+import com.fon.bg.ac.rs.cvbuilder.entity.abs.BaseEntity;
 import com.fon.bg.ac.rs.cvbuilder.entity.embedded.SectionSectionFieldEmbeddedId;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -15,7 +16,7 @@ import java.util.Objects;
                 @AssociationOverride(name = "sectionSectionFieldEmbeddedId.sectionField", joinColumns = @JoinColumn(name = "section_field_id", nullable = false))
         }
 )
-public class SectionSectionField {
+public class SectionSectionField extends BaseEntity {
 
     @EmbeddedId
     @Fetch(value = FetchMode.JOIN)
