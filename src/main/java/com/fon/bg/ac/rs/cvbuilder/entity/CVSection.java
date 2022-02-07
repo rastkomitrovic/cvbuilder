@@ -21,6 +21,9 @@ public class CVSection {
     @JoinColumn(name = "section_id", nullable = false)
     private Section section;
 
+    @Column(name = "order_number", nullable = false)
+    private Integer orderNumber;
+
     @OneToMany(mappedBy = "cvSectionSectionFieldEmbeddedId.cvSection", fetch = FetchType.LAZY)
     private Set<CVSectionSectionField> cvSectionSectionFields;
 
@@ -28,10 +31,11 @@ public class CVSection {
 
     }
 
-    public CVSection(Long id, CV cv, Section section, Set<CVSectionSectionField> cvSectionSectionFields) {
+    public CVSection(Long id, CV cv, Section section, Integer orderNumber, Set<CVSectionSectionField> cvSectionSectionFields) {
         this.id = id;
         this.cv = cv;
         this.section = section;
+        this.orderNumber = orderNumber;
         this.cvSectionSectionFields = cvSectionSectionFields;
     }
 
@@ -57,6 +61,14 @@ public class CVSection {
 
     public void setSection(Section section) {
         this.section = section;
+    }
+
+    public Integer getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(Integer orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
     public Set<CVSectionSectionField> getCvSectionSectionFields() {

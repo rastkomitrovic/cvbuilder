@@ -20,11 +20,11 @@ public class CV {
     @Column(name = "description", nullable = true)
     private String description;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Basic
     @Column(name = "date_created", nullable = false)
     private LocalDateTime dateCreated;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Basic
     @Column(name = "date_edited", nullable = true)
     private LocalDateTime dateEdited;
 
