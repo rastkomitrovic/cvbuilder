@@ -33,7 +33,7 @@ public class User extends BaseEntity {
     private String indexNumber;
 
     @Column(name = "activated", nullable = false)
-    private boolean activated;
+    private Boolean activated;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id", nullable = false)
@@ -43,7 +43,7 @@ public class User extends BaseEntity {
 
     }
 
-    public User(Long id, String username, String password, String firstName, String lastName, String email, String indexNumber, boolean activated, Role role) {
+    public User(Long id, String username, String password, String firstName, String lastName, String email, String indexNumber, Boolean activated, Role role) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -111,11 +111,11 @@ public class User extends BaseEntity {
         this.indexNumber = indexNumber;
     }
 
-    public boolean isActivated() {
+    public Boolean isActivated() {
         return activated;
     }
 
-    public void setActivated(boolean activated) {
+    public void setActivated(Boolean activated) {
         this.activated = activated;
     }
 

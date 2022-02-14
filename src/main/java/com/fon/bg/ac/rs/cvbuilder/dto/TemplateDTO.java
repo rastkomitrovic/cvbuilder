@@ -54,7 +54,7 @@ public class TemplateDTO {
         this.description = description;
     }
 
-    public Boolean getPrivateTemplate() {
+    public Boolean isPrivateTemplate() {
         return privateTemplate;
     }
 

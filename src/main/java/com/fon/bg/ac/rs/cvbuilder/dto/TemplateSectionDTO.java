@@ -36,7 +36,7 @@ public class TemplateSectionDTO {
         this.section = section;
     }
 
-    public Boolean getRepeatable() {
+    public Boolean isRepeatable() {
         return repeatable;
     }
 

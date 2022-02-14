@@ -42,7 +42,7 @@ public class TemplateSection extends BaseEntity {
         this.templateSectionEmbeddedId = templateSectionEmbeddedId;
     }
 
-    public Boolean getRepeatable() {
+    public Boolean isRepeatable() {
         return repeatable;
     }
 

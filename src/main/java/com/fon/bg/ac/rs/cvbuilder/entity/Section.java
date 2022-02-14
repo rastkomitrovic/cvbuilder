@@ -1,6 +1,5 @@
 package com.fon.bg.ac.rs.cvbuilder.entity;
 
-
 import com.fon.bg.ac.rs.cvbuilder.entity.abs.BaseEntity;
 
 import javax.persistence.*;
@@ -15,7 +14,6 @@ public class Section extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
 
     @Column(name = "name", nullable = false, unique = true)
     private String name;

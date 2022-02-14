@@ -18,7 +18,7 @@ public class UserDTO {
 
     private String indexNumber;
 
-    private String activated;
+    private boolean activated;
 
     private RoleDTO role;
 
@@ -26,7 +26,7 @@ public class UserDTO {
 
     }
 
-    public UserDTO(Long id, String username, String password, String firstName, String lastName, String email, String indexNumber, String activated, RoleDTO role) {
+    public UserDTO(Long id, String username, String password, String firstName, String lastName, String email, String indexNumber, boolean activated, RoleDTO role) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -94,11 +94,11 @@ public class UserDTO {
         this.indexNumber = indexNumber;
     }
 
-    public String getActivated() {
+    public boolean isActivated() {
         return activated;
     }
 
-    public void setActivated(String activated) {
+    public void setActivated(boolean activated) {
         this.activated = activated;
     }
 
