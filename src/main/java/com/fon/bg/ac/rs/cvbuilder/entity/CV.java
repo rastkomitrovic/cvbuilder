@@ -38,7 +38,7 @@ public class CV extends BaseEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "cv", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "cv", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<CVSection> cvSections;
 
     public CV(){

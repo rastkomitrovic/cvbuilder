@@ -1,5 +1,6 @@
 package com.fon.bg.ac.rs.cvbuilder.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -17,7 +18,7 @@ public class CVSectionSectionFieldDTO {
 
     private Double doubleValue;
 
-    private LocalDateTime dateValue;
+    private LocalDate dateValue;
 
     private LocalDateTime dateTimeValue;
 
@@ -27,7 +28,7 @@ public class CVSectionSectionFieldDTO {
 
     }
 
-    public CVSectionSectionFieldDTO(CVSectionDTO cvSection, SectionFieldDTO sectionField, Integer orderNumber, String stringValue, Long numberValue, Double doubleValue, LocalDateTime dateValue, LocalDateTime dateTimeValue, byte[] blobValue) {
+    public CVSectionSectionFieldDTO(CVSectionDTO cvSection, SectionFieldDTO sectionField, Integer orderNumber, String stringValue, Long numberValue, Double doubleValue, LocalDate dateValue, LocalDateTime dateTimeValue, byte[] blobValue) {
         this.cvSection = cvSection;
         this.sectionField = sectionField;
         this.orderNumber = orderNumber;
@@ -87,11 +88,11 @@ public class CVSectionSectionFieldDTO {
         this.doubleValue = doubleValue;
     }
 
-    public LocalDateTime getDateValue() {
+    public LocalDate getDateValue() {
         return dateValue;
     }
 
-    public void setDateValue(LocalDateTime dateValue) {
+    public void setDateValue(LocalDate dateValue) {
         this.dateValue = dateValue;
     }
 
