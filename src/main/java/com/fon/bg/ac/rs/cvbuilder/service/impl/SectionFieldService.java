@@ -1,9 +1,9 @@
 package com.fon.bg.ac.rs.cvbuilder.service.impl;
 
-import com.fon.bg.ac.rs.cvbuilder.dto.SectionFieldTypeDTO;
-import com.fon.bg.ac.rs.cvbuilder.entity.SectionFieldType;
-import com.fon.bg.ac.rs.cvbuilder.mapper.SectionFieldTypeMapper;
-import com.fon.bg.ac.rs.cvbuilder.repository.SectionFieldTypeRepository;
+import com.fon.bg.ac.rs.cvbuilder.dto.SectionFieldDTO;
+import com.fon.bg.ac.rs.cvbuilder.entity.SectionField;
+import com.fon.bg.ac.rs.cvbuilder.mapper.SectionFieldMapper;
+import com.fon.bg.ac.rs.cvbuilder.repository.SectionFieldRepository;
 import com.fon.bg.ac.rs.cvbuilder.service.generic.GenericCrudService;
 import org.springframework.stereotype.Service;
 
@@ -12,21 +12,21 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class SectionFieldTypeService implements GenericCrudService<SectionFieldTypeDTO,Long> {
+public class SectionFieldService implements GenericCrudService<SectionFieldDTO, Long> {
 
     @Resource
-    private SectionFieldTypeRepository repository;
+    private SectionFieldRepository repository;
 
     @Resource
-    private SectionFieldTypeMapper mapper;
+    private SectionFieldMapper mapper;
 
     @Override
-    public SectionFieldTypeDTO save(SectionFieldTypeDTO object) {
+    public SectionFieldDTO save(SectionFieldDTO object) {
         return mapper.toDTO(repository.save(mapper.toDAO(object)));
     }
 
     @Override
-    public SectionFieldTypeDTO update(SectionFieldTypeDTO object) {
+    public SectionFieldDTO update(SectionFieldDTO object) {
         return mapper.toDTO(repository.save(mapper.toDAO(object)));
     }
 
@@ -36,12 +36,12 @@ public class SectionFieldTypeService implements GenericCrudService<SectionFieldT
     }
 
     @Override
-    public List<SectionFieldTypeDTO> getAll() {
+    public List<SectionFieldDTO> getAll() {
         return mapper.toDTOList(repository.findAll());
     }
 
     @Override
-    public Optional<SectionFieldTypeDTO> findById(Long id) {
+    public Optional<SectionFieldDTO> findById(Long id) {
         return repository.findById(id).map(it -> mapper.toDTO(it));
     }
 }

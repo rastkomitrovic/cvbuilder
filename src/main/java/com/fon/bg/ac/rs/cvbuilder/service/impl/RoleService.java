@@ -1,9 +1,8 @@
 package com.fon.bg.ac.rs.cvbuilder.service.impl;
 
-import com.fon.bg.ac.rs.cvbuilder.dto.SectionFieldTypeDTO;
-import com.fon.bg.ac.rs.cvbuilder.entity.SectionFieldType;
-import com.fon.bg.ac.rs.cvbuilder.mapper.SectionFieldTypeMapper;
-import com.fon.bg.ac.rs.cvbuilder.repository.SectionFieldTypeRepository;
+import com.fon.bg.ac.rs.cvbuilder.dto.RoleDTO;
+import com.fon.bg.ac.rs.cvbuilder.mapper.RoleMapper;
+import com.fon.bg.ac.rs.cvbuilder.repository.RoleRepository;
 import com.fon.bg.ac.rs.cvbuilder.service.generic.GenericCrudService;
 import org.springframework.stereotype.Service;
 
@@ -12,21 +11,21 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class SectionFieldTypeService implements GenericCrudService<SectionFieldTypeDTO,Long> {
+public class RoleService implements GenericCrudService<RoleDTO,Long> {
 
     @Resource
-    private SectionFieldTypeRepository repository;
+    private RoleRepository repository;
 
     @Resource
-    private SectionFieldTypeMapper mapper;
+    private RoleMapper mapper;
 
     @Override
-    public SectionFieldTypeDTO save(SectionFieldTypeDTO object) {
+    public RoleDTO save(RoleDTO object) {
         return mapper.toDTO(repository.save(mapper.toDAO(object)));
     }
 
     @Override
-    public SectionFieldTypeDTO update(SectionFieldTypeDTO object) {
+    public RoleDTO update(RoleDTO object) {
         return mapper.toDTO(repository.save(mapper.toDAO(object)));
     }
 
@@ -36,12 +35,12 @@ public class SectionFieldTypeService implements GenericCrudService<SectionFieldT
     }
 
     @Override
-    public List<SectionFieldTypeDTO> getAll() {
+    public List<RoleDTO> getAll() {
         return mapper.toDTOList(repository.findAll());
     }
 
     @Override
-    public Optional<SectionFieldTypeDTO> findById(Long id) {
+    public Optional<RoleDTO> findById(Long id) {
         return repository.findById(id).map(it -> mapper.toDTO(it));
     }
 }
