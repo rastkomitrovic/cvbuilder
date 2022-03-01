@@ -56,4 +56,8 @@ public class TemplateSectionEmbeddedId extends BaseEntity implements Serializabl
                 Objects.equals(section, that.section);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(template, section);
+    }
 }

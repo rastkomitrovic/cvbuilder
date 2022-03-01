@@ -10,7 +10,7 @@ public class RoleMapper extends GenericMapper<Role, RoleDTO> {
 
     @Override
     protected RoleDTO toDTOTransformation(Role object) {
-        if(object == null)
+        if (object == null)
             return null;
         RoleDTO roleDTO = new RoleDTO();
         roleDTO.setId(object.getId());
@@ -20,7 +20,7 @@ public class RoleMapper extends GenericMapper<Role, RoleDTO> {
 
     @Override
     protected Role toDAOTransformation(RoleDTO object) {
-        if(object == null)
+        if (object == null)
             return null;
         Role role = new Role();
         role.setId(object.getId());

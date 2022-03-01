@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Embeddable
 public class CVSectionSectionFieldEmbeddedId extends BaseEntity implements Serializable {
@@ -43,5 +44,19 @@ public class CVSectionSectionFieldEmbeddedId extends BaseEntity implements Seria
 
     public void setSectionField(SectionField sectionField) {
         this.sectionField = sectionField;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CVSectionSectionFieldEmbeddedId)) return false;
+        CVSectionSectionFieldEmbeddedId that = (CVSectionSectionFieldEmbeddedId) o;
+        return Objects.equals(cvSection, that.cvSection) &&
+                Objects.equals(sectionField, that.sectionField);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cvSection, sectionField);
     }
 }

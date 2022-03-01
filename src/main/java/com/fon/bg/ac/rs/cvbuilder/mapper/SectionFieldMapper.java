@@ -20,7 +20,7 @@ public class SectionFieldMapper extends GenericMapper<SectionField, SectionField
         sectionField.setId(object.getId());
         sectionField.setName(object.getName());
         sectionField.setDescription(object.getDescription());
-        if(CVBuilderUtils.isLazyEntityInitialized(object.getSectionFieldType()))
+        if (CVBuilderUtils.isLazyEntityInitialized(object.getSectionFieldType()))
             sectionField.setSectionFieldType(sectionFieldTypeMapper.toDTO(object.getSectionFieldType()));
         return sectionField;
     }

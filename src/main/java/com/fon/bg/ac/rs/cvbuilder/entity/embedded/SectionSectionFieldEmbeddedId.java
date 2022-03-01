@@ -56,4 +56,8 @@ public class SectionSectionFieldEmbeddedId extends BaseEntity implements Seriali
                 Objects.equals(sectionField, that.sectionField);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(section, sectionField);
+    }
 }

@@ -9,15 +9,15 @@ import com.fon.bg.ac.rs.cvbuilder.entity.CVSectionSectionField;
 import com.fon.bg.ac.rs.cvbuilder.entity.embedded.CVSectionSectionFieldEmbeddedId;
 import com.fon.bg.ac.rs.cvbuilder.mapper.generic.GenericMapper;
 import com.fon.bg.ac.rs.cvbuilder.util.CVBuilderUtils;
-import org.apache.commons.io.FileUtils;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.io.File;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+@Service
 public class CVMapper extends GenericMapper<CV, CVDTO> {
 
     @Resource
@@ -40,26 +40,26 @@ public class CVMapper extends GenericMapper<CV, CVDTO> {
         cv.setDescription(object.getDescription());
         cv.setDateCreated(object.getDateCreated());
         cv.setDateEdited(object.getDateEdited());
-        if(CVBuilderUtils.isLazyEntityInitialized(object.getTemplate()))
+        if (CVBuilderUtils.isLazyEntityInitialized(object.getTemplate()))
             cv.setTemplate(templateMapper.toDTO(object.getTemplate()));
-        if(CVBuilderUtils.isLazyEntityInitialized(object.getUser()))
+        if (CVBuilderUtils.isLazyEntityInitialized(object.getUser()))
             cv.setUser(userMapper.toDTO(object.getUser()));
-        if(CVBuilderUtils.isLazyInitializedCollection(object.getCvSections()))
-            cv.setCvSections(mapCvSectionsToDTO(object.getCvSections(),cv));
+        if (CVBuilderUtils.isLazyInitializedCollection(object.getCvSections()))
+            cv.setCvSections(mapCvSectionsToDTO(object.getCvSections(), cv));
         return cv;
     }
 
     private List<CVSectionDTO> mapCvSectionsToDTO(Set<CVSection> cvSections, CVDTO cv) {
         List<CVSectionDTO> list = new LinkedList<>();
-        if(cvSections == null)
+        if (cvSections == null)
             return list;
-        cvSections.forEach(value ->{
+        cvSections.forEach(value -> {
             CVSectionDTO cvSection = new CVSectionDTO();
             cvSection.setId(value.getId());
             cvSection.setCv(cv);
             cvSection.setSection(sectionMapper.toDTO(value.getSection()));
             cvSection.setOrderNumber(value.getOrderNumber());
-            cvSection.setCvSectionSectionFields(mapCvSectionSectionFieldsToDTO(value.getCvSectionSectionFields(),cvSection));
+            cvSection.setCvSectionSectionFields(mapCvSectionSectionFieldsToDTO(value.getCvSectionSectionFields(), cvSection));
             list.add(cvSection);
         });
         return list;
@@ -67,7 +67,7 @@ public class CVMapper extends GenericMapper<CV, CVDTO> {
 
     private List<CVSectionSectionFieldDTO> mapCvSectionSectionFieldsToDTO(Set<CVSectionSectionField> cvSectionSectionFields, CVSectionDTO cvSection) {
         List<CVSectionSectionFieldDTO> list = new LinkedList<>();
-        if(cvSectionSectionFields == null)
+        if (cvSectionSectionFields == null)
             return list;
         cvSectionSectionFields.forEach(value -> {
             CVSectionSectionFieldDTO cvSectionSectionField = new CVSectionSectionFieldDTO();
@@ -95,13 +95,13 @@ public class CVMapper extends GenericMapper<CV, CVDTO> {
         cv.setDateEdited(object.getDateEdited());
         cv.setTemplate(templateMapper.toDAO(object.getTemplate()));
         cv.setUser(userMapper.toDAO(object.getUser()));
-        cv.setCvSections(mapCvSectionsToDAO(object.getCvSections(),cv));
+        cv.setCvSections(mapCvSectionsToDAO(object.getCvSections(), cv));
         return cv;
     }
 
     private Set<CVSection> mapCvSectionsToDAO(List<CVSectionDTO> cvSections, CV cv) {
         Set<CVSection> set = new HashSet<>();
-        if(cvSections == null)
+        if (cvSections == null)
             return set;
         cvSections.forEach(value -> {
             CVSection cvSection = new CVSection();
@@ -109,7 +109,7 @@ public class CVMapper extends GenericMapper<CV, CVDTO> {
             cvSection.setCv(cv);
             cvSection.setSection(sectionMapper.toDAO(value.getSection()));
             cvSection.setOrderNumber(value.getOrderNumber());
-            cvSection.setCvSectionSectionFields(mapCvSectionSectionFieldsToDAO(value.getCvSectionSectionFields(),cvSection));
+            cvSection.setCvSectionSectionFields(mapCvSectionSectionFieldsToDAO(value.getCvSectionSectionFields(), cvSection));
             set.add(cvSection);
         });
         return set;
@@ -117,7 +117,7 @@ public class CVMapper extends GenericMapper<CV, CVDTO> {
 
     private Set<CVSectionSectionField> mapCvSectionSectionFieldsToDAO(List<CVSectionSectionFieldDTO> cvSectionSectionFields, CVSection cvSection) {
         Set<CVSectionSectionField> set = new HashSet<>();
-        if(cvSectionSectionFields == null)
+        if (cvSectionSectionFields == null)
             return set;
         cvSectionSectionFields.forEach(value -> {
             CVSectionSectionField sectionSectionField = new CVSectionSectionField();

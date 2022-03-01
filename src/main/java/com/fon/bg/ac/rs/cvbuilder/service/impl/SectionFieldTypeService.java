@@ -7,41 +7,19 @@ import com.fon.bg.ac.rs.cvbuilder.repository.SectionFieldTypeRepository;
 import com.fon.bg.ac.rs.cvbuilder.service.generic.GenericCrudService;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-import java.util.List;
-import java.util.Optional;
+import javax.transaction.Transactional;
 
 @Service
-public class SectionFieldTypeService implements GenericCrudService<SectionFieldTypeDTO,Long> {
-
-    @Resource
-    private SectionFieldTypeRepository repository;
-
-    @Resource
-    private SectionFieldTypeMapper mapper;
+@Transactional
+public class SectionFieldTypeService extends GenericCrudService<SectionFieldType, SectionFieldTypeDTO, Long, SectionFieldTypeRepository, SectionFieldTypeMapper> {
 
     @Override
-    public SectionFieldTypeDTO save(SectionFieldTypeDTO object) {
-        return mapper.toDTO(repository.save(mapper.toDAO(object)));
+    protected void checkPreconditionsForSave(SectionFieldTypeDTO object) {
+
     }
 
     @Override
-    public SectionFieldTypeDTO update(SectionFieldTypeDTO object) {
-        return mapper.toDTO(repository.save(mapper.toDAO(object)));
-    }
+    protected void checkPreconditionsForUpdate(SectionFieldTypeDTO object) {
 
-    @Override
-    public void delete(Long id) {
-        repository.deleteById(id);
-    }
-
-    @Override
-    public List<SectionFieldTypeDTO> getAll() {
-        return mapper.toDTOList(repository.findAll());
-    }
-
-    @Override
-    public Optional<SectionFieldTypeDTO> findById(Long id) {
-        return repository.findById(id).map(it -> mapper.toDTO(it));
     }
 }

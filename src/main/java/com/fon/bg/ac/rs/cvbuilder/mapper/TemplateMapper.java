@@ -7,6 +7,7 @@ import com.fon.bg.ac.rs.cvbuilder.entity.TemplateSection;
 import com.fon.bg.ac.rs.cvbuilder.entity.embedded.TemplateSectionEmbeddedId;
 import com.fon.bg.ac.rs.cvbuilder.mapper.generic.GenericMapper;
 import com.fon.bg.ac.rs.cvbuilder.util.CVBuilderUtils;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.HashSet;
@@ -14,6 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+@Service
 public class TemplateMapper extends GenericMapper<Template, TemplateDTO> {
 
     @Resource
@@ -29,16 +31,16 @@ public class TemplateMapper extends GenericMapper<Template, TemplateDTO> {
         template.setName(object.getName());
         template.setDescription(object.getDescription());
         template.setPrivateTemplate(object.isPrivateTemplate());
-        if(CVBuilderUtils.isLazyEntityInitialized(object.getUser()))
+        if (CVBuilderUtils.isLazyEntityInitialized(object.getUser()))
             template.setUser(userMapper.toDTO(object.getUser()));
-        if(CVBuilderUtils.isLazyInitializedCollection(object.getTemplateSections()))
-            template.setTemplateSections(mapTemplateSectionsToDTO(object.getTemplateSections(),template));
+        if (CVBuilderUtils.isLazyInitializedCollection(object.getTemplateSections()))
+            template.setTemplateSections(mapTemplateSectionsToDTO(object.getTemplateSections(), template));
         return template;
     }
 
     private List<TemplateSectionDTO> mapTemplateSectionsToDTO(Set<TemplateSection> templateSections, TemplateDTO template) {
         List<TemplateSectionDTO> list = new LinkedList<>();
-        if(templateSections == null)
+        if (templateSections == null)
             return list;
         templateSections.forEach(value -> {
             TemplateSectionDTO templateSection = new TemplateSectionDTO();
@@ -58,13 +60,13 @@ public class TemplateMapper extends GenericMapper<Template, TemplateDTO> {
         template.setDescription(object.getDescription());
         template.setPrivateTemplate(object.isPrivateTemplate());
         template.setUser(userMapper.toDAO(object.getUser()));
-        template.setTemplateSections(mapTemplateSectionsToDAO(object.getTemplateSections(),template));
+        template.setTemplateSections(mapTemplateSectionsToDAO(object.getTemplateSections(), template));
         return template;
     }
 
     private Set<TemplateSection> mapTemplateSectionsToDAO(List<TemplateSectionDTO> templateSections, Template template) {
         Set<TemplateSection> set = new HashSet<>();
-        if(templateSections == null)
+        if (templateSections == null)
             return set;
         templateSections.forEach(value -> {
             TemplateSection templateSection = new TemplateSection();
