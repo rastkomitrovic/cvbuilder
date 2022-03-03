@@ -17,7 +17,6 @@ import javax.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.OptionalInt;
 
 @Service
 @Transactional
@@ -44,6 +43,7 @@ public class UserService extends GenericPagingService<User, UserDTO, Long, UserR
             exceptionMessages.add("Vec postoji korisnik sa unetim brojem indeksa: " + object.getIndexNumber());
         if (object.getRole() == null)
             exceptionMessages.add("Korisnik nema podesenu rolu");
+
         CVBuilderUtils.throwExceptionIfHasMessages(exceptionMessages);
     }
 
@@ -52,18 +52,12 @@ public class UserService extends GenericPagingService<User, UserDTO, Long, UserR
         List<String> exceptionMessages = new LinkedList<>();
         if (!repository.existsById(object.getId()))
             exceptionMessages.add("Ne postoji korsinik sa unetim ID-om: " + object.getId());
-        if (object.getUsername() != null && repository.existsByUsernameAndIdNot(object.getUsername(), object.getId()))
+        if (repository.existsByUsernameAndIdNot(object.getUsername(), object.getId()))
             exceptionMessages.add("Vec postoji korisnik sa unetim korisnickim imenom: " + object.getUsername());
-        if (object.getEmail() != null && repository.existsByEmailAndIdNot(object.getEmail(), object.getId()))
+        if (repository.existsByEmailAndIdNot(object.getEmail(), object.getId()))
             exceptionMessages.add("Vec postoji korisnik sa unetim email-om: " + object.getEmail());
-        if (object.getIndexNumber() != null && repository.existsByIndexNumberAndIdNot(object.getIndexNumber(), object.getId()))
+        if (repository.existsByIndexNumberAndIdNot(object.getIndexNumber(), object.getId()))
             exceptionMessages.add("Vec postoji korisnik sa unetim brojem indeksa: " + object.getIndexNumber());
-        Optional<User> userOptional = repository.findById(object.getId());
-        if (!userOptional.isPresent())
-            exceptionMessages.add("Greska u pronalazenju korisnika sa unetim ID-om: " + object.getId());
-
-        User user = userOptional.get();
-
 
         CVBuilderUtils.throwExceptionIfHasMessages(exceptionMessages);
     }

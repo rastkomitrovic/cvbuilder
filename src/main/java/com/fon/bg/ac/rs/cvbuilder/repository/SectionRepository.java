@@ -12,4 +12,8 @@ public interface SectionRepository extends PagingAndSortingRepository<Section, L
 
     @Query("select s from Section s where s.name like concat('%',:param,'%')")
     Page<Section> searchPage(Pageable pageable, String param);
+
+    boolean existsByName(String name);
+
+    boolean existsByNameAndIdNot(String name, Long id);
 }
