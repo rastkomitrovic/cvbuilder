@@ -1,11 +1,16 @@
 package com.fon.bg.ac.rs.cvbuilder.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 public class RoleDTO {
 
+    @NotNull(message = "Id role ne sme biti prazan")
     private Long id;
 
+    @NotNull(message = "Naziv role ne sme biti prazan")
+    @Size(min = 3, max = 255, message = "Naziv role mora biti izmedju 3 i 255 karaktera")
     private String name;
 
     public RoleDTO(){

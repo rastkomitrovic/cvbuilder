@@ -12,6 +12,7 @@ import com.fon.bg.ac.rs.cvbuilder.util.CVBuilderUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.ZoneId;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -38,8 +39,8 @@ public class CVMapper extends GenericMapper<CV, CVDTO> {
         cv.setId(object.getId());
         cv.setName(object.getName());
         cv.setDescription(object.getDescription());
-        cv.setDateCreated(object.getDateCreated());
-        cv.setDateEdited(object.getDateEdited());
+        cv.setDateCreated(object.getDateCreated().atZone(ZoneId.systemDefault()).toInstant());
+        cv.setDateEdited(object.getDateEdited().atZone(ZoneId.systemDefault()).toInstant());
         if (CVBuilderUtils.isLazyEntityInitialized(object.getTemplate()))
             cv.setTemplate(templateMapper.toDTO(object.getTemplate()));
         if (CVBuilderUtils.isLazyEntityInitialized(object.getUser()))
@@ -91,8 +92,8 @@ public class CVMapper extends GenericMapper<CV, CVDTO> {
         cv.setId(object.getId());
         cv.setName(object.getName());
         cv.setDescription(object.getDescription());
-        cv.setDateCreated(object.getDateCreated());
-        cv.setDateEdited(object.getDateEdited());
+        cv.setDateCreated(object.getDateCreated().atZone(ZoneId.systemDefault()).toLocalDateTime());
+        cv.setDateEdited(object.getDateEdited().atZone(ZoneId.systemDefault()).toLocalDateTime());
         cv.setTemplate(templateMapper.toDAO(object.getTemplate()));
         cv.setUser(userMapper.toDAO(object.getUser()));
         cv.setCvSections(mapCvSectionsToDAO(object.getCvSections(), cv));

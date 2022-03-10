@@ -38,7 +38,7 @@ public class TemplateService extends GenericPagingService<Template, TemplateDTO,
     }
 
     @Override
-    public Page<TemplateDTO> searchPage(Pageable pageable, String searchParams) {
-        return repository.searchPage(pageable,searchParams).map(it -> mapper.toDTO(it));
+    public Page<TemplateDTO> searchPage(Pageable pageable, String searchParam) {
+        return repository.searchPage(pageable,searchParam).map(it -> mapper.toDTO(it));
     }
 }

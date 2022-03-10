@@ -1,15 +1,16 @@
 package com.fon.bg.ac.rs.cvbuilder.util;
 
-public class CVBuilderException extends RuntimeException {
-    private final String message;
+import java.util.List;
 
-    public CVBuilderException(String message) {
-        super(message);
-        this.message = message;
+public class CVBuilderException extends RuntimeException {
+    private final List<String> messages;
+
+    public CVBuilderException(List<String> messages) {
+        super("Greska");
+        this.messages = messages;
     }
 
-    @Override
-    public String getMessage() {
-        return message;
+    public List<String> getMessages() {
+        return messages;
     }
 }

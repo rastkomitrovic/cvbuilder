@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
 
+// T - DAO class
+// R - DTO class
 public abstract class GenericMapper<T,R> {
     public R toDTO(T object){
         if(object == null)

@@ -8,6 +8,11 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 import java.util.Optional;
 
+// D- DAO class
+// T - DTO class
+// R - Id class
+// S - Repository class
+// M - Mapper class
 public abstract class GenericCrudService<D, T, R, S extends CrudRepository<D, R>, M extends GenericMapper<D, T>> {
 
     @Autowired

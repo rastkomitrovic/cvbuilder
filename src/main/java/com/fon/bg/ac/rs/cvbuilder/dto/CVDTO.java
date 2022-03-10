@@ -1,32 +1,43 @@
 package com.fon.bg.ac.rs.cvbuilder.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Size;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
 public class CVDTO {
 
+    @NotNull(message = "Id CV-a ne sme biti prazan")
     private Long id;
 
+    @NotNull(message = "Naziv CV-a ne sme biti prazan")
+    @Size(min = 3, max = 255, message = "Naziv CV-a mora biti izmedju 3 i 255 karaktera")
     private String name;
 
     private String description;
 
-    private LocalDateTime dateCreated;
+    @NotNull(message = "Datum kreiranja ne sme biti prazan")
+    @PastOrPresent(message = "Datum kreiranja mora biti ili trenutni datum ili datum u proslosti")
+    private Instant dateCreated;
 
-    private LocalDateTime dateEdited;
+    private Instant dateEdited;
 
     private TemplateDTO template;
 
+    @NotNull(message = "Korisnik CV-a ne sme biti prazan")
     private UserDTO user;
 
+    @NotNull(message = "Sekcije CV-a ne smeju biti prazne")
     private List<CVSectionDTO> cvSections;
 
     public CVDTO(){
 
     }
 
-    public CVDTO(Long id, String name, String description, LocalDateTime dateCreated, LocalDateTime dateEdited, TemplateDTO template, UserDTO user, List<CVSectionDTO> cvSections) {
+    public CVDTO(Long id, String name, String description, Instant dateCreated, Instant dateEdited, TemplateDTO template, UserDTO user, List<CVSectionDTO> cvSections) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -61,19 +72,19 @@ public class CVDTO {
         this.description = description;
     }
 
-    public LocalDateTime getDateCreated() {
+    public Instant getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(LocalDateTime dateCreated) {
+    public void setDateCreated(Instant dateCreated) {
         this.dateCreated = dateCreated;
     }
 
-    public LocalDateTime getDateEdited() {
+    public Instant getDateEdited() {
         return dateEdited;
     }
 
-    public void setDateEdited(LocalDateTime dateEdited) {
+    public void setDateEdited(Instant dateEdited) {
         this.dateEdited = dateEdited;
     }
 

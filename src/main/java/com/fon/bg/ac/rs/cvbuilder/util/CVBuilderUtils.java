@@ -17,11 +17,7 @@ public class CVBuilderUtils {
     }
 
     public static void throwExceptionIfHasMessages(List<String> messages) {
-        if(!messages.isEmpty()){
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("Greska prilikom izvrsavanja operacije.\nIdentifikovane greske:");
-            messages.forEach(it -> stringBuilder.append("\n").append(it));
-            throw new CVBuilderException(stringBuilder.toString());
-        }
+        if(!messages.isEmpty())
+            throw new CVBuilderException(messages);
     }
 }
