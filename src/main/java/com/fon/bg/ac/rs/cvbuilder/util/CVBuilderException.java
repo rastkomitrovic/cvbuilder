@@ -1,7 +1,7 @@
 package com.fon.bg.ac.rs.cvbuilder.util;
 
-public class CVBuilderException extends Exception {
-    private String message;
+public class CVBuilderException extends RuntimeException {
+    private final String message;
 
     public CVBuilderException(String message) {
         super(message);

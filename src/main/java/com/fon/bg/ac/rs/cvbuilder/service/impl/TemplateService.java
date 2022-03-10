@@ -20,7 +20,7 @@ import java.util.List;
 public class TemplateService extends GenericPagingService<Template, TemplateDTO, Long, TemplateRepository, TemplateMapper> {
 
     @Override
-    protected void checkPreconditionsForSave(TemplateDTO object) throws CVBuilderException {
+    protected void checkPreconditionsForSave(TemplateDTO object) {
         List<String> exceptionMessages = new LinkedList<>();
         if(repository.existsById(object.getId()))
             exceptionMessages.add("Vec postoji sablon sa unetim ID-om");
@@ -29,7 +29,7 @@ public class TemplateService extends GenericPagingService<Template, TemplateDTO,
     }
 
     @Override
-    protected void checkPreconditionsForUpdate(TemplateDTO object) throws CVBuilderException {
+    protected void checkPreconditionsForUpdate(TemplateDTO object) {
         List<String> exceptionMessages = new LinkedList<>();
         if(!repository.existsById(object.getId()))
             exceptionMessages.add("Ne postoji sablon sa unetim ID-om");

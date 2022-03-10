@@ -5,7 +5,6 @@ import com.fon.bg.ac.rs.cvbuilder.util.CVBuilderException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,17 +16,17 @@ public abstract class GenericCrudService<D, T, R, S extends CrudRepository<D, R>
     @Autowired
     protected M mapper;
 
-    public T save(T object) throws CVBuilderException {
+    public T save(T object) {
         checkPreconditionsForSave(object);
         return mapper.toDTO(repository.save(mapper.toDAO(object)));
     }
 
-    public T update(T object) throws CVBuilderException {
+    public T update(T object) {
         checkPreconditionsForUpdate(object);
         return mapper.toDTO(repository.save(mapper.toDAO(object)));
     }
 
-    void delete(R id) {
+    public void delete(R id) {
         repository.deleteById(id);
     }
 
@@ -39,7 +38,7 @@ public abstract class GenericCrudService<D, T, R, S extends CrudRepository<D, R>
         return repository.findById(id).map(it -> mapper.toDTO(it));
     }
 
-    protected abstract void checkPreconditionsForSave(T object) throws CVBuilderException;
+    protected abstract void checkPreconditionsForSave(T object);
 
-    protected abstract void checkPreconditionsForUpdate(T object) throws CVBuilderException;
+    protected abstract void checkPreconditionsForUpdate(T object);
 }

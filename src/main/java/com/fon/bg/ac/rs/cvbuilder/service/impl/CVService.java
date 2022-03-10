@@ -5,7 +5,6 @@ import com.fon.bg.ac.rs.cvbuilder.entity.CV;
 import com.fon.bg.ac.rs.cvbuilder.mapper.CVMapper;
 import com.fon.bg.ac.rs.cvbuilder.repository.CVRepository;
 import com.fon.bg.ac.rs.cvbuilder.service.generic.GenericPagingService;
-import com.fon.bg.ac.rs.cvbuilder.util.CVBuilderException;
 import com.fon.bg.ac.rs.cvbuilder.util.CVBuilderUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +24,7 @@ public class CVService extends GenericPagingService<CV, CVDTO, Long, CVRepositor
     }
 
     @Override
-    protected void checkPreconditionsForSave(CVDTO object) throws CVBuilderException {
+    protected void checkPreconditionsForSave(CVDTO object) {
         List<String> exceptionMessages = new LinkedList<>();
         if (repository.existsById(object.getId()))
             exceptionMessages.add("Vec postoji CV sa unetim ID-om");
@@ -34,7 +33,7 @@ public class CVService extends GenericPagingService<CV, CVDTO, Long, CVRepositor
     }
 
     @Override
-    protected void checkPreconditionsForUpdate(CVDTO object) throws CVBuilderException {
+    protected void checkPreconditionsForUpdate(CVDTO object) {
         List<String> exceptionMessages = new LinkedList<>();
         if (!repository.existsById(object.getId()))
             exceptionMessages.add("Ne postoji CV sa unetim ID-om");

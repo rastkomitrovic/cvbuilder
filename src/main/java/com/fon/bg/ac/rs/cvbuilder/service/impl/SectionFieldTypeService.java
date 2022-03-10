@@ -18,7 +18,7 @@ import java.util.List;
 public class SectionFieldTypeService extends GenericCrudService<SectionFieldType, SectionFieldTypeDTO, Long, SectionFieldTypeRepository, SectionFieldTypeMapper> {
 
     @Override
-    protected void checkPreconditionsForSave(SectionFieldTypeDTO object) throws CVBuilderException {
+    protected void checkPreconditionsForSave(SectionFieldTypeDTO object) {
         List<String> exceptionMessages = new LinkedList<>();
         if(repository.existsById(object.getId()))
             exceptionMessages.add("Vec postoji tip polja sa unetim ID-om");
@@ -30,7 +30,7 @@ public class SectionFieldTypeService extends GenericCrudService<SectionFieldType
     }
 
     @Override
-    protected void checkPreconditionsForUpdate(SectionFieldTypeDTO object) throws CVBuilderException {
+    protected void checkPreconditionsForUpdate(SectionFieldTypeDTO object) {
         List<String> exceptionMessages = new LinkedList<>();
         if(!repository.existsById(object.getId()))
             exceptionMessages.add("Ne postoji tip polja sa unetim ID-om");

@@ -18,7 +18,7 @@ import java.util.List;
 public class RoleService extends GenericCrudService<Role, RoleDTO, Long, RoleRepository, RoleMapper> {
 
     @Override
-    protected void checkPreconditionsForSave(RoleDTO object) throws CVBuilderException {
+    protected void checkPreconditionsForSave(RoleDTO object) {
         List<String> exceptionMessages = new LinkedList<>();
         if (repository.existsById(object.getId()))
             exceptionMessages.add("Vec postoji rola sa unetim ID-om");
@@ -29,7 +29,7 @@ public class RoleService extends GenericCrudService<Role, RoleDTO, Long, RoleRep
     }
 
     @Override
-    protected void checkPreconditionsForUpdate(RoleDTO object) throws CVBuilderException {
+    protected void checkPreconditionsForUpdate(RoleDTO object) {
         List<String> exceptionMessages = new LinkedList<>();
         if (!repository.existsById(object.getId()))
             exceptionMessages.add("Ne postoji rola sa unetim ID-om");

@@ -16,7 +16,7 @@ public class CVBuilderUtils {
         return Hibernate.isInitialized(collection);
     }
 
-    public static void throwExceptionIfHasMessages(List<String> messages) throws CVBuilderException{
+    public static void throwExceptionIfHasMessages(List<String> messages) {
         if(!messages.isEmpty()){
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("Greska prilikom izvrsavanja operacije.\nIdentifikovane greske:");

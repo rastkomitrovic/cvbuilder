@@ -31,7 +31,7 @@ public class UserService extends GenericPagingService<User, UserDTO, Long, UserR
     }
 
     @Override
-    protected void checkPreconditionsForSave(UserDTO object) throws CVBuilderException {
+    protected void checkPreconditionsForSave(UserDTO object) {
         List<String> exceptionMessages = new LinkedList<>();
         if (repository.existsById(object.getId()))
             exceptionMessages.add("Vec postoji korisnik sa unetim ID-om: " + object.getId());
@@ -48,7 +48,7 @@ public class UserService extends GenericPagingService<User, UserDTO, Long, UserR
     }
 
     @Override
-    protected void checkPreconditionsForUpdate(UserDTO object) throws CVBuilderException {
+    protected void checkPreconditionsForUpdate(UserDTO object) {
         List<String> exceptionMessages = new LinkedList<>();
         if (!repository.existsById(object.getId()))
             exceptionMessages.add("Ne postoji korsinik sa unetim ID-om: " + object.getId());

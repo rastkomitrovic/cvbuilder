@@ -18,7 +18,7 @@ import java.util.List;
 public class SectionFieldService extends GenericCrudService<SectionField, SectionFieldDTO, Long, SectionFieldRepository, SectionFieldMapper> {
 
     @Override
-    protected void checkPreconditionsForSave(SectionFieldDTO object) throws CVBuilderException {
+    protected void checkPreconditionsForSave(SectionFieldDTO object) {
         List<String> exceptionMessages = new LinkedList<>();
         if(repository.existsById(object.getId()))
             exceptionMessages.add("Vec postoji polje sekcije sa unetim ID-om");
@@ -27,7 +27,7 @@ public class SectionFieldService extends GenericCrudService<SectionField, Sectio
     }
 
     @Override
-    protected void checkPreconditionsForUpdate(SectionFieldDTO object) throws CVBuilderException {
+    protected void checkPreconditionsForUpdate(SectionFieldDTO object) {
         List<String> exceptionMessages = new LinkedList<>();
         if(!repository.existsById(object.getId()))
             exceptionMessages.add("Ne postoji polje sekcije sa unetim ID-om");
