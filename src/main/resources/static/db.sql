@@ -10,7 +10,7 @@ drop table if exists section;
 drop table if exists sectionfield;
 drop table if exists sectionfieldtype;
 
-/*DDL*/
+/*DDL and DML*/
 
 CREATE TABLE `role` (
                         `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -155,6 +155,7 @@ insert into template(name, description, private, user_id) values ('Prvi sablon',
 CREATE TABLE `templatesection` (
                                    `template_id` bigint(20) NOT NULL,
                                    `section_id` bigint(20) NOT NULL,
+                                   `order_number` int NOT NULL,
                                    `repeatable` tinyint(1) NOT NULL,
                                    PRIMARY KEY (`template_id`, `section_id`),
                                    KEY `fk_templatesection_template` (`template_id`),
@@ -163,8 +164,8 @@ CREATE TABLE `templatesection` (
                                    CONSTRAINT `fk_templatesection_section` FOREIGN KEY (`section_id`) REFERENCES `section` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-insert into templatesection (template_id, section_id, repeatable) values ((select id from template where name = 'Prvi sablon'),(select id from section where name = 'Osnovne informacije'),0);
-insert into templatesection (template_id, section_id, repeatable) values ((select id from template where name = 'Prvi sablon'),(select id from section where name = 'Iskustvo'),1);
+insert into templatesection (template_id, section_id,order_number, repeatable) values ((select id from template where name = 'Prvi sablon'),(select id from section where name = 'Osnovne informacije'),1,0);
+insert into templatesection (template_id, section_id,order_number, repeatable) values ((select id from template where name = 'Prvi sablon'),(select id from section where name = 'Iskustvo'),2,1);
 
 
 CREATE TABLE `cv` (

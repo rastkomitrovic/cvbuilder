@@ -1,10 +1,13 @@
 package com.fon.bg.ac.rs.cvbuilder.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.Objects;
 
 public class SectionSectionFieldDTO {
 
+    @JsonBackReference
     private SectionDTO section;
 
     private SectionFieldDTO sectionField;

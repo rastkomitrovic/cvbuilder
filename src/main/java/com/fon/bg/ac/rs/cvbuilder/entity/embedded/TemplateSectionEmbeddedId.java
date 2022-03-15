@@ -1,5 +1,6 @@
 package com.fon.bg.ac.rs.cvbuilder.entity.embedded;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fon.bg.ac.rs.cvbuilder.entity.Section;
 import com.fon.bg.ac.rs.cvbuilder.entity.Template;
 import com.fon.bg.ac.rs.cvbuilder.entity.abs.BaseEntity;

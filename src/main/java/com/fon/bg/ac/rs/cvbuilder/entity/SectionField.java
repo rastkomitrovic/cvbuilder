@@ -20,7 +20,7 @@ public class SectionField extends BaseEntity {
     @Column(name = "description", nullable = true)
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "section_field_type_id", nullable = false)
     private SectionFieldType sectionFieldType;
 

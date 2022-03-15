@@ -22,6 +22,7 @@ public class Section extends BaseEntity {
     private String description;
 
     @OneToMany(mappedBy = "sectionSectionFieldEmbeddedId.section", fetch = FetchType.LAZY)
+    @OrderBy("orderNumber")
     private Set<SectionSectionField> sectionSectionFields;
 
     public Section() {

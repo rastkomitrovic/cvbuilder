@@ -22,6 +22,9 @@ public class TemplateSection extends BaseEntity {
     @Fetch(value = FetchMode.JOIN)
     private TemplateSectionEmbeddedId templateSectionEmbeddedId;
 
+    @Column(name = "order_number", nullable = false)
+    private Integer orderNumber;
+
     @Column(name = "repeatable", nullable = false)
     private Boolean repeatable;
 
@@ -29,8 +32,9 @@ public class TemplateSection extends BaseEntity {
 
     }
 
-    public TemplateSection(TemplateSectionEmbeddedId templateSectionEmbeddedId, Boolean repeatable) {
+    public TemplateSection(TemplateSectionEmbeddedId templateSectionEmbeddedId, Integer orderNumber, Boolean repeatable) {
         this.templateSectionEmbeddedId = templateSectionEmbeddedId;
+        this.orderNumber = orderNumber;
         this.repeatable = repeatable;
     }
 
@@ -40,6 +44,14 @@ public class TemplateSection extends BaseEntity {
 
     public void setTemplateSectionEmbeddedId(TemplateSectionEmbeddedId templateSectionEmbeddedId) {
         this.templateSectionEmbeddedId = templateSectionEmbeddedId;
+    }
+
+    public Integer getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(Integer orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
     public Boolean isRepeatable() {

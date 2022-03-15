@@ -29,6 +29,7 @@ public class Template extends BaseEntity {
     private User user;
 
     @OneToMany(mappedBy = "templateSectionEmbeddedId.template", fetch = FetchType.LAZY)
+    @OrderBy("orderNumber")
     private Set<TemplateSection> templateSections;
 
     public Template() {

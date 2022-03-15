@@ -46,6 +46,7 @@ public class TemplateMapper extends GenericMapper<Template, TemplateDTO> {
             TemplateSectionDTO templateSection = new TemplateSectionDTO();
             templateSection.setTemplate(template);
             templateSection.setSection(sectionMapper.toDTO(value.getTemplateSectionEmbeddedId().getSection()));
+            templateSection.setOrderNumber(value.getOrderNumber());
             templateSection.setRepeatable(value.isRepeatable());
             list.add(templateSection);
         });
@@ -74,6 +75,7 @@ public class TemplateMapper extends GenericMapper<Template, TemplateDTO> {
             templateSectionEmbeddedId.setTemplate(template);
             templateSectionEmbeddedId.setSection(sectionMapper.toDAO(value.getSection()));
             templateSection.setTemplateSectionEmbeddedId(templateSectionEmbeddedId);
+            templateSection.setOrderNumber(value.getOrderNumber());
             templateSection.setRepeatable(value.isRepeatable());
             set.add(templateSection);
         });

@@ -1,12 +1,17 @@
 package com.fon.bg.ac.rs.cvbuilder.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.Objects;
 
 public class TemplateSectionDTO {
 
+    @JsonBackReference
     private TemplateDTO template;
 
     private SectionDTO section;
+
+    private Integer orderNumber;
 
     private Boolean repeatable;
 
@@ -14,9 +19,10 @@ public class TemplateSectionDTO {
 
     }
 
-    public TemplateSectionDTO(TemplateDTO template, SectionDTO section, Boolean repeatable) {
+    public TemplateSectionDTO(TemplateDTO template, SectionDTO section, Integer orderNumber, Boolean repeatable) {
         this.template = template;
         this.section = section;
+        this.orderNumber = orderNumber;
         this.repeatable = repeatable;
     }
 
@@ -34,6 +40,14 @@ public class TemplateSectionDTO {
 
     public void setSection(SectionDTO section) {
         this.section = section;
+    }
+
+    public Integer getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(Integer orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
     public Boolean isRepeatable() {
