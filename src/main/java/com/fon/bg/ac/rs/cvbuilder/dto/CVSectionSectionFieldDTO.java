@@ -1,15 +1,23 @@
 package com.fon.bg.ac.rs.cvbuilder.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class CVSectionSectionFieldDTO {
 
+    @JsonBackReference
     private CVSectionDTO cvSection;
 
+    @NotNull(message = "Polje sekcije u polju sekcije CV-a ne sme biti prazan")
     private SectionFieldDTO sectionField;
 
+    @NotNull(message = "Redni broj polja sekcije CV-a ne sme biti prazan")
+    @Min(value = 1,message = "Redni broj sekcije u CV-u mora biti 1 ili veci")
     private Integer orderNumber;
 
     private String stringValue;

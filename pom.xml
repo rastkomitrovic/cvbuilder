@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.fon.bg.ac.rs</groupId>
 	<artifactId>CVBuilder</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>CVBuilder</name>
 	<description>CV Builder Web Application</description>
 	<properties>

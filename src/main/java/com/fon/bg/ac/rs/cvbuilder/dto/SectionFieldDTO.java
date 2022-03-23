@@ -1,15 +1,23 @@
 package com.fon.bg.ac.rs.cvbuilder.dto;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 public class SectionFieldDTO {
 
+    @NotNull(message = "Id polja sekcije ne sme biti prazan")
+    @Min(value = 0, message = "Id polja sekcije mora biti 0 ili vece")
     private Long id;
 
+    @NotNull(message = "Naziv polja sekcije ne sme biti prazno")
+    @Size(min = 3, max = 255, message = "Naziv polja sekcije mora imati izmedju 3 i 255 karaktera")
     private String name;
 
     private String description;
 
+    @NotNull(message = "Tip polja sekcije ne sme biti prazan")
     private SectionFieldTypeDTO sectionFieldType;
 
     public SectionFieldDTO(){

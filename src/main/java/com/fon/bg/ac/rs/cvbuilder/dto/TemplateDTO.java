@@ -1,20 +1,30 @@
 package com.fon.bg.ac.rs.cvbuilder.dto;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Objects;
 
 public class TemplateDTO {
 
+    @NotNull(message = "Id sablona ne sme biti prazan")
+    @Min(value = 0, message = "Id sablona mora biti 0 ili vece")
     private Long id;
 
+    @NotNull(message = "Naziv sablona ne sme biti prazan")
+    @Size(min = 3,max = 255,message = "Naziv sablona mora imati izmedju 3 i 255 karaktera")
     private String name;
 
     private String description;
 
+    @NotNull(message = "Vrednost da li je sablon privatan ne sme biti prazno")
     private Boolean privateTemplate;
 
+    @NotNull(message = "Korisnik koji je kreirao sablon ne sme biti prazan")
     private UserDTO user;
 
+    @NotNull(message = "Sekcije sablona ne smeju biti prazne")
     private List<TemplateSectionDTO> templateSections;
 
     public TemplateDTO(){

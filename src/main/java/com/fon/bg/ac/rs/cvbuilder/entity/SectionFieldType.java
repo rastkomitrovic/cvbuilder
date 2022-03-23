@@ -17,6 +17,9 @@ public class SectionFieldType extends BaseEntity {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
+    @Column(name = "key_value", nullable = false, unique = true)
+    private String keyValue;
+
     @Column(name = "description", nullable = true)
     private String description;
 
@@ -24,9 +27,10 @@ public class SectionFieldType extends BaseEntity {
 
     }
 
-    public SectionFieldType(Long id, String name, String description) {
+    public SectionFieldType(Long id, String name, String keyValue, String description) {
         this.id = id;
         this.name = name;
+        this.keyValue = keyValue;
         this.description = description;
     }
 
@@ -44,6 +48,14 @@ public class SectionFieldType extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getKeyValue() {
+        return keyValue;
+    }
+
+    public void setKeyValue(String keyValue) {
+        this.keyValue = keyValue;
     }
 
     public String getDescription() {

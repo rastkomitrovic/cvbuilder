@@ -2,6 +2,8 @@ package com.fon.bg.ac.rs.cvbuilder.dto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 public class TemplateSectionDTO {
@@ -9,10 +11,14 @@ public class TemplateSectionDTO {
     @JsonBackReference
     private TemplateDTO template;
 
+    @NotNull(message = "Sekcija u sekciji sablona ne sme biti prazna")
     private SectionDTO section;
 
+    @NotNull(message = "Redni broj sekcije u sablonu ne sme biti prazan")
+    @Min(value = 1, message = "Redni broj sekcije u sablonu mora biti 1 ili vece")
     private Integer orderNumber;
 
+    @NotNull(message = "Naznaka da li sekcija moze da se ponavlja u sablonu ne sme biti prazna")
     private Boolean repeatable;
 
     public TemplateSectionDTO(){

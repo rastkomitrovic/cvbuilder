@@ -1,16 +1,17 @@
 package com.fon.bg.ac.rs.cvbuilder.dto;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
 public class CVDTO {
 
     @NotNull(message = "Id CV-a ne sme biti prazan")
+    @Min(value = 0, message = "Id CV-a mora biti 0 ili veci")
     private Long id;
 
     @NotNull(message = "Naziv CV-a ne sme biti prazan")
@@ -25,6 +26,7 @@ public class CVDTO {
 
     private Instant dateEdited;
 
+    @NotNull(message = "Sablon koji je koriscen ne sme biti prazan")
     private TemplateDTO template;
 
     @NotNull(message = "Korisnik CV-a ne sme biti prazan")

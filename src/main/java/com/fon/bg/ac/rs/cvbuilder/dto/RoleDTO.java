@@ -1,5 +1,6 @@
 package com.fon.bg.ac.rs.cvbuilder.dto;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
@@ -7,6 +8,7 @@ import java.util.Objects;
 public class RoleDTO {
 
     @NotNull(message = "Id role ne sme biti prazan")
+    @Min(value = 0, message = "Id role mora biti 0 ili vece")
     private Long id;
 
     @NotNull(message = "Naziv role ne sme biti prazan")

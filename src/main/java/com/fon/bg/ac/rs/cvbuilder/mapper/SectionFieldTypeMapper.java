@@ -13,6 +13,7 @@ public class SectionFieldTypeMapper extends GenericMapper<SectionFieldType, Sect
         SectionFieldTypeDTO sectionField = new SectionFieldTypeDTO();
         sectionField.setId(object.getId());
         sectionField.setName(object.getName());
+        sectionField.setKeyValue(object.getKeyValue());
         sectionField.setDescription(object.getDescription());
         return sectionField;
     }
@@ -22,6 +23,7 @@ public class SectionFieldTypeMapper extends GenericMapper<SectionFieldType, Sect
         SectionFieldType sectionField = new SectionFieldType();
         sectionField.setId(object.getId());
         sectionField.setName(object.getName());
+        sectionField.setKeyValue(object.getKeyValue());
         sectionField.setDescription(object.getDescription());
         return sectionField;
     }

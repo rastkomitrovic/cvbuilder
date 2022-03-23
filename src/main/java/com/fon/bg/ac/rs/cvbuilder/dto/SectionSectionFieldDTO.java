@@ -3,6 +3,8 @@ package com.fon.bg.ac.rs.cvbuilder.dto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 public class SectionSectionFieldDTO {
@@ -10,8 +12,11 @@ public class SectionSectionFieldDTO {
     @JsonBackReference
     private SectionDTO section;
 
+    @NotNull(message = "Polje sekcije ne sme biti prazno")
     private SectionFieldDTO sectionField;
 
+    @NotNull(message = "Redni broj polja u sekciji ne sme biti prazan")
+    @Min(value = 1, message = "Redni broj polja u sekciji mora biti 1 ili vece")
     private Integer orderNumber;
 
     public SectionSectionFieldDTO(){
