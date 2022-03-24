@@ -4,17 +4,58 @@ import com.fon.bg.ac.rs.cvbuilder.entity.CVSection;
 import com.fon.bg.ac.rs.cvbuilder.entity.SectionField;
 import com.fon.bg.ac.rs.cvbuilder.entity.abs.BaseEntity;
 
-import javax.persistence.Embeddable;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
 public class CVSectionSectionFieldEmbeddedId extends BaseEntity implements Serializable {
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @Column(name = "cvsection_id", nullable = false)
+    private Long cvSectionId;
+
+    @Column(name = "section_field_id", nullable = false)
+    private Long sectionFieldId;
+
+    public CVSectionSectionFieldEmbeddedId(){
+
+    }
+
+    public CVSectionSectionFieldEmbeddedId(Long cvSectionId, Long sectionFieldId){
+        this.cvSectionId = cvSectionId;
+        this.sectionFieldId = sectionFieldId;
+    }
+
+    public Long getCvSectionId() {
+        return cvSectionId;
+    }
+
+    public void setCvSectionId(Long cvSectionId) {
+        this.cvSectionId = cvSectionId;
+    }
+
+    public Long getSectionFieldId() {
+        return sectionFieldId;
+    }
+
+    public void setSectionFieldId(Long sectionFieldId) {
+        this.sectionFieldId = sectionFieldId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CVSectionSectionFieldEmbeddedId)) return false;
+        CVSectionSectionFieldEmbeddedId that = (CVSectionSectionFieldEmbeddedId) o;
+        return Objects.equals(cvSectionId, that.cvSectionId) && Objects.equals(sectionFieldId, that.sectionFieldId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cvSectionId, sectionFieldId);
+    }
+
+    /*@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cvsection_id",nullable = false)
     private CVSection cvSection;
 
@@ -58,5 +99,5 @@ public class CVSectionSectionFieldEmbeddedId extends BaseEntity implements Seria
     @Override
     public int hashCode() {
         return Objects.hash(cvSection, sectionField);
-    }
+    }*/
 }

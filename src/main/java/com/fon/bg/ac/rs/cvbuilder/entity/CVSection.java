@@ -26,10 +26,10 @@ public class CVSection extends BaseEntity {
     @Column(name = "order_number", nullable = false)
     private Integer orderNumber;
 
-    @OneToMany(mappedBy = "cvSectionSectionFieldEmbeddedId.cvSection", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cvSectionSectionFieldEmbeddedId.cvSectionId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<CVSectionSectionField> cvSectionSectionFields;
 
-    public CVSection(){
+    public CVSection() {
 
     }
 

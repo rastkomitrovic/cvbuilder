@@ -40,7 +40,8 @@ public class CVMapper extends GenericMapper<CV, CVDTO> {
         cv.setName(object.getName());
         cv.setDescription(object.getDescription());
         cv.setDateCreated(object.getDateCreated().atZone(ZoneId.systemDefault()).toInstant());
-        cv.setDateEdited(object.getDateEdited().atZone(ZoneId.systemDefault()).toInstant());
+        if(cv.getDateEdited()!=null)
+            cv.setDateEdited(object.getDateEdited().atZone(ZoneId.systemDefault()).toInstant());
         if (CVBuilderUtils.isLazyEntityInitialized(object.getTemplate()))
             cv.setTemplate(templateMapper.toDTO(object.getTemplate()));
         if (CVBuilderUtils.isLazyEntityInitialized(object.getUser()))
@@ -58,7 +59,8 @@ public class CVMapper extends GenericMapper<CV, CVDTO> {
             CVSectionDTO cvSection = new CVSectionDTO();
             cvSection.setId(value.getId());
             cvSection.setCv(cv);
-            cvSection.setSection(sectionMapper.toDTO(value.getSection()));
+            if(CVBuilderUtils.isLazyEntityInitialized(value.getSection()))
+                cvSection.setSection(sectionMapper.toDTO(value.getSection()));
             cvSection.setOrderNumber(value.getOrderNumber());
             cvSection.setCvSectionSectionFields(mapCvSectionSectionFieldsToDTO(value.getCvSectionSectionFields(), cvSection));
             list.add(cvSection);
@@ -73,7 +75,8 @@ public class CVMapper extends GenericMapper<CV, CVDTO> {
         cvSectionSectionFields.forEach(value -> {
             CVSectionSectionFieldDTO cvSectionSectionField = new CVSectionSectionFieldDTO();
             cvSectionSectionField.setCvSection(cvSection);
-            cvSectionSectionField.setSectionField(sectionFieldMapper.toDTO(value.getCvSectionSectionFieldEmbeddedId().getSectionField()));
+            if(CVBuilderUtils.isLazyEntityInitialized(value.getSectionField()))
+                cvSectionSectionField.setSectionField(sectionFieldMapper.toDTO(value.getSectionField()));
             cvSectionSectionField.setOrderNumber(value.getOrderNumber());
             cvSectionSectionField.setStringValue(value.getStringValue());
             cvSectionSectionField.setNumberValue(value.getNumberValue());
@@ -125,8 +128,10 @@ public class CVMapper extends GenericMapper<CV, CVDTO> {
         cvSectionSectionFields.forEach(value -> {
             CVSectionSectionField sectionSectionField = new CVSectionSectionField();
             CVSectionSectionFieldEmbeddedId id = new CVSectionSectionFieldEmbeddedId();
-            id.setCvSection(cvSection);
-            id.setSectionField(sectionFieldMapper.toDAO(value.getSectionField()));
+            id.setCvSectionId(cvSection.getId());
+            id.setSectionFieldId(value.getSectionField().getId());
+            sectionSectionField.setCvSection(cvSection);
+            sectionSectionField.setSectionField(sectionFieldMapper.toDAO(value.getSectionField()));
             sectionSectionField.setCvSectionSectionFieldEmbeddedId(id);
             sectionSectionField.setOrderNumber(value.getOrderNumber());
             sectionSectionField.setStringValue(value.getStringValue());

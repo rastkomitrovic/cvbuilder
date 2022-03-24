@@ -10,16 +10,26 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "cvsectionsectionfield")
-@AssociationOverrides(
+/*@AssociationOverrides(
         {
-                @AssociationOverride(name = "cvSectionSectionFieldEmbeddedId.cvSection", joinColumns = @JoinColumn(name = "cvsection_id", nullable = false)),
-                @AssociationOverride(name = "cvSectionSectionFieldEmbeddedId.sectionField", joinColumns = @JoinColumn(name = "section_field_id", nullable = false))
+                @AssociationOverride(name = "cvSectionSectionFieldEmbeddedId.cvSectionId", joinColumns = @JoinColumn(name = "cvsection_id", nullable = false)),
+                @AssociationOverride(name = "cvSectionSectionFieldEmbeddedId.sectionFieldId", joinColumns = @JoinColumn(name = "section_field_id", nullable = false))
         }
-)
+)*/
 public class CVSectionSectionField extends BaseEntity {
 
     @EmbeddedId
     private CVSectionSectionFieldEmbeddedId cvSectionSectionFieldEmbeddedId;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @MapsId("cvSectionId")
+    @JoinColumn(name = "cvsection_id", insertable = false, updatable = false)
+    private CVSection cvSection;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @MapsId("sectionFieldId")
+    @JoinColumn(name = "section_field_id", insertable = false, updatable = false)
+    private SectionField sectionField;
 
     @Column(name = "order_number", nullable = false)
     private Integer orderNumber;
@@ -49,8 +59,10 @@ public class CVSectionSectionField extends BaseEntity {
 
     }
 
-    public CVSectionSectionField(CVSectionSectionFieldEmbeddedId cvSectionSectionFieldEmbeddedId, Integer orderNumber, String stringValue, Long numberValue, Double doubleValue, LocalDate dateValue, LocalDateTime dateTimeValue, byte[] blobValue) {
+    public CVSectionSectionField(CVSectionSectionFieldEmbeddedId cvSectionSectionFieldEmbeddedId, CVSection cvSection, SectionField sectionField, Integer orderNumber, String stringValue, Long numberValue, Double doubleValue, LocalDate dateValue, LocalDateTime dateTimeValue, byte[] blobValue) {
         this.cvSectionSectionFieldEmbeddedId = cvSectionSectionFieldEmbeddedId;
+        this.cvSection = cvSection;
+        this.sectionField = sectionField;
         this.orderNumber = orderNumber;
         this.stringValue = stringValue;
         this.numberValue = numberValue;
@@ -66,6 +78,22 @@ public class CVSectionSectionField extends BaseEntity {
 
     public void setCvSectionSectionFieldEmbeddedId(CVSectionSectionFieldEmbeddedId cvSectionSectionFieldEmbeddedId) {
         this.cvSectionSectionFieldEmbeddedId = cvSectionSectionFieldEmbeddedId;
+    }
+
+    public CVSection getCvSection() {
+        return cvSection;
+    }
+
+    public void setCvSection(CVSection cvSection) {
+        this.cvSection = cvSection;
+    }
+
+    public SectionField getSectionField() {
+        return sectionField;
+    }
+
+    public void setSectionField(SectionField sectionField) {
+        this.sectionField = sectionField;
     }
 
     public Integer getOrderNumber() {
