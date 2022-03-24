@@ -92,8 +92,10 @@ public class CVMapper extends GenericMapper<CV, CVDTO> {
         cv.setId(object.getId());
         cv.setName(object.getName());
         cv.setDescription(object.getDescription());
-        cv.setDateCreated(object.getDateCreated().atZone(ZoneId.systemDefault()).toLocalDateTime());
-        cv.setDateEdited(object.getDateEdited().atZone(ZoneId.systemDefault()).toLocalDateTime());
+        if (object.getDateCreated() != null)
+            cv.setDateCreated(object.getDateCreated().atZone(ZoneId.systemDefault()).toLocalDateTime());
+        if (object.getDateEdited() != null)
+            cv.setDateEdited(object.getDateEdited().atZone(ZoneId.systemDefault()).toLocalDateTime());
         cv.setTemplate(templateMapper.toDAO(object.getTemplate()));
         cv.setUser(userMapper.toDAO(object.getUser()));
         cv.setCvSections(mapCvSectionsToDAO(object.getCvSections(), cv));

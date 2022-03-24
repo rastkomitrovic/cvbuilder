@@ -182,7 +182,7 @@ CREATE TABLE `cv` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `cvsection` (
-                             `id` bigint(20) NOT NUll,
+                             `id` bigint(20) NOT NUll AUTO_INCREMENT,
                              `cv_id` bigint(20) NOT NULL,
                              `section_id` bigint(20) NOT NULL,
                              `order_number` int NOT NULL,
