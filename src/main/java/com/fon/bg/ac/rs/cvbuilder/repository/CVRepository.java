@@ -16,6 +16,6 @@ public interface CVRepository extends PagingAndSortingRepository<CV, Long> {
     Page<CV> searchPage(Pageable pageable, String param);
 
     @Override
-    @Query("select c from CV c join fetch c.template join fetch c.user join fetch c.cvSections sec join fetch sec.section join fetch sec.cvSectionSectionFields where c.id =:aLong ")
+    @Query("select c from CV c join fetch c.template t join fetch t.templateSections tsecs join fetch tsecs.templateSectionEmbeddedId.section tsec join fetch tsec.sectionSectionFields join fetch t.user join fetch c.user join fetch c.cvSections sec join fetch sec.section join fetch sec.cvSectionSectionFields where c.id =:aLong ")
     Optional<CV> findById(Long aLong);
 }

@@ -27,6 +27,7 @@ public class CVSection extends BaseEntity {
     private Integer orderNumber;
 
     @OneToMany(mappedBy = "cvSectionSectionFieldEmbeddedId.cvSectionId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OrderBy("orderNumber")
     private Set<CVSectionSectionField> cvSectionSectionFields;
 
     public CVSection() {

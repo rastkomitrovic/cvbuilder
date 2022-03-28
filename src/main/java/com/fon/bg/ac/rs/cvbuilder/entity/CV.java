@@ -1,6 +1,7 @@
 package com.fon.bg.ac.rs.cvbuilder.entity;
 
 import com.fon.bg.ac.rs.cvbuilder.entity.abs.BaseEntity;
+import org.springframework.core.annotation.Order;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -39,6 +40,7 @@ public class CV extends BaseEntity {
     private User user;
 
     @OneToMany(mappedBy = "cv", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OrderBy("orderNumber")
     private Set<CVSection> cvSections;
 
     public CV() {
