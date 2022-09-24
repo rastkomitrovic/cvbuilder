@@ -5,7 +5,6 @@ import com.fon.bg.ac.rs.cvbuilder.dto.TemplateSectionDTO;
 import com.fon.bg.ac.rs.cvbuilder.entity.Template;
 import com.fon.bg.ac.rs.cvbuilder.entity.TemplateSection;
 import com.fon.bg.ac.rs.cvbuilder.entity.embedded.TemplateSectionEmbeddedId;
-import com.fon.bg.ac.rs.cvbuilder.mapper.generic.GenericMapper;
 import com.fon.bg.ac.rs.cvbuilder.util.CVBuilderUtils;
 import org.springframework.stereotype.Service;
 

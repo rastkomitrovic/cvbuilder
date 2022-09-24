@@ -2,30 +2,37 @@ package com.fon.bg.ac.rs.cvbuilder.mapper;
 
 import com.fon.bg.ac.rs.cvbuilder.dto.RoleDTO;
 import com.fon.bg.ac.rs.cvbuilder.entity.Role;
-import com.fon.bg.ac.rs.cvbuilder.mapper.generic.GenericMapper;
 import org.springframework.stereotype.Service;
 
-@Service
-public class RoleMapper extends GenericMapper<Role, RoleDTO> {
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
-    @Override
-    protected RoleDTO toDTOTransformation(Role object) {
-        if (object == null)
+@Service
+public class RoleMapper {
+
+    public List<RoleDTO> toRoleDTOS(Iterable<Role> roles) {
+        if (roles == null || !roles.iterator().hasNext())
+            return Collections.emptyList();
+
+        List<RoleDTO> roleDTOS = new LinkedList<>();
+        roles.forEach(role -> roleDTOS.add(toRoleDTO(role)));
+        return roleDTOS;
+    }
+
+    public RoleDTO toRoleDTO(Role role) {
+        if (role == null)
             return null;
         RoleDTO roleDTO = new RoleDTO();
-        roleDTO.setId(object.getId());
-        roleDTO.setName(object.getName());
+        roleDTO.setId(role.getId());
+        roleDTO.setName(role.getName());
         return roleDTO;
     }
 
-    @Override
-    protected Role toDAOTransformation(RoleDTO object) {
-        if (object == null)
-            return null;
+    public Role toDAO(RoleDTO roleDTO) {
         Role role = new Role();
-        role.setId(object.getId());
-        role.setName(object.getName());
+        role.setId(roleDTO.getId());
+        role.setName(roleDTO.getName());
         return role;
     }
-
 }

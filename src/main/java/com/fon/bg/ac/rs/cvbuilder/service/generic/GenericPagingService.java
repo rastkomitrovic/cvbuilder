@@ -1,6 +1,5 @@
 package com.fon.bg.ac.rs.cvbuilder.service.generic;
 
-import com.fon.bg.ac.rs.cvbuilder.mapper.generic.GenericMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;

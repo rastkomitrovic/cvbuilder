@@ -7,7 +7,6 @@ import com.fon.bg.ac.rs.cvbuilder.entity.CV;
 import com.fon.bg.ac.rs.cvbuilder.entity.CVSection;
 import com.fon.bg.ac.rs.cvbuilder.entity.CVSectionSectionField;
 import com.fon.bg.ac.rs.cvbuilder.entity.embedded.CVSectionSectionFieldEmbeddedId;
-import com.fon.bg.ac.rs.cvbuilder.mapper.generic.GenericMapper;
 import com.fon.bg.ac.rs.cvbuilder.util.CVBuilderUtils;
 import org.springframework.stereotype.Service;
 

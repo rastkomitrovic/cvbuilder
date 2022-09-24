@@ -3,6 +3,7 @@ package com.fon.bg.ac.rs.cvbuilder.repository;
 import com.fon.bg.ac.rs.cvbuilder.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
@@ -14,9 +15,18 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
     Page<User> searchPage(Pageable pageable, String param);
 
     boolean existsByUsername(String username);
+
     boolean existsByEmail(String email);
+
     boolean existsByIndexNumber(String indexNumber);
+
     boolean existsByUsernameAndIdNot(String username, Long userId);
-    boolean existsByEmailAndIdNot(String email,Long userId);
+
+    boolean existsByEmailAndIdNot(String email, Long userId);
+
     boolean existsByIndexNumberAndIdNot(String email, Long userId);
+
+    @Modifying
+    @Query("update User u set u.activated=false where u.id=:id")
+    void deactivateUser(Long id);
 }

@@ -2,7 +2,6 @@ package com.fon.bg.ac.rs.cvbuilder.mapper;
 
 import com.fon.bg.ac.rs.cvbuilder.dto.SectionFieldDTO;
 import com.fon.bg.ac.rs.cvbuilder.entity.SectionField;
-import com.fon.bg.ac.rs.cvbuilder.mapper.generic.GenericMapper;
 import com.fon.bg.ac.rs.cvbuilder.util.CVBuilderUtils;
 import org.springframework.stereotype.Service;
 

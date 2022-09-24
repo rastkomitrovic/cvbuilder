@@ -1,10 +1,9 @@
 package com.fon.bg.ac.rs.cvbuilder.service.generic;
 
-import com.fon.bg.ac.rs.cvbuilder.mapper.generic.GenericMapper;
-import com.fon.bg.ac.rs.cvbuilder.util.CVBuilderException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,12 +20,12 @@ public abstract class GenericCrudService<D, T, R, S extends CrudRepository<D, R>
     @Autowired
     protected M mapper;
 
-    public T save(T object) {
+    public T save(@Valid T object) {
         checkPreconditionsForSave(object);
         return mapper.toDTO(repository.save(mapper.toDAO(object)));
     }
 
-    public T update(T object) {
+    public T update(@Valid T object) {
         checkPreconditionsForUpdate(object);
         return mapper.toDTO(repository.save(mapper.toDAO(object)));
     }

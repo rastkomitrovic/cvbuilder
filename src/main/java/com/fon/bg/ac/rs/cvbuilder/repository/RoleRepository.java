@@ -4,10 +4,10 @@ import com.fon.bg.ac.rs.cvbuilder.entity.Role;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface RoleRepository extends CrudRepository<Role,Long> {
 
-    boolean existsByName(String name);
-
-    boolean existsByNameAndIdNot(String name, Long id);
+    Optional<Role> findByName(String name);
 }

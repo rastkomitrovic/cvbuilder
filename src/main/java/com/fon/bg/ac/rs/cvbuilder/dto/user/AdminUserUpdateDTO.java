@@ -1,60 +1,44 @@
-package com.fon.bg.ac.rs.cvbuilder.dto;
+package com.fon.bg.ac.rs.cvbuilder.dto.user;
 
-import javax.validation.constraints.Email;
+
+import com.fon.bg.ac.rs.cvbuilder.dto.RoleDTO;
+
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Objects;
 
-public class UserDTO {
+public class AdminUserUpdateDTO {
 
     @NotNull(message = "Id korisnika ne sme biti null")
+    @Min(value = 0, message = "Id korisnika mora biti 0 ili vece")
     private Long id;
 
-    @NotNull(message = "Korisnicko ime korisnika ne sme biti prazno")
-    @Size(min = 3,max = 255, message = "Korisnicko ime mora imati izmedju 3 i 255 karaktera")
     private String username;
 
-    @NotNull(message = "Sifra korisnika ne sme biti prazna")
-    @Size(min = 5, max = 255, message = "Sifra korisnika mora imati izmedju 3 i 255 karaktera")
     private String password;
 
-    private String oldPassword;
-
-    @NotNull(message = "Ime korisnika ne sme biti prazno")
-    @Size(message = "Ime korisnika mora imati izmedju 3 i 255 karaktera")
     private String firstName;
 
-    @NotNull(message = "Prezime korisnika ne sme biti prazno")
-    @Size(message = "Prezime korisnika mora imati izmedju 3 i 255 karaktera")
     private String lastName;
 
-    @NotNull(message = "Email korisnika ne sme biti prazan")
-    @Email(message = "Email korisnika mora biti u ispravnom formatu")
     private String email;
 
-    @NotNull(message = "Broj indeksa korisnika ne sme biti prazan")
     private String indexNumber;
 
-    @NotNull(message = "Aktivan polje ne sme biti prazno")
-    private boolean activated;
-
-    @NotNull(message = "Rola korisnika ne sme biti prazna")
     private RoleDTO role;
 
-    public UserDTO(){
+    public AdminUserUpdateDTO() {
 
     }
 
-    public UserDTO(Long id, String username, String password, String oldPassword, String firstName, String lastName, String email, String indexNumber, boolean activated, RoleDTO role) {
+    public AdminUserUpdateDTO(Long id, String username, String password, String firstName, String lastName, String email, String indexNumber, RoleDTO role) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.oldPassword = oldPassword;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.indexNumber = indexNumber;
-        this.activated = activated;
         this.role = role;
     }
 
@@ -80,14 +64,6 @@ public class UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public void setOldPassword(String oldPassword) {
-        this.oldPassword = oldPassword;
-    }
-
-    public String getOldPassword() {
-        return oldPassword;
     }
 
     public String getFirstName() {
@@ -122,14 +98,6 @@ public class UserDTO {
         this.indexNumber = indexNumber;
     }
 
-    public boolean isActivated() {
-        return activated;
-    }
-
-    public void setActivated(boolean activated) {
-        this.activated = activated;
-    }
-
     public RoleDTO getRole() {
         return role;
     }
@@ -141,9 +109,27 @@ public class UserDTO {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof UserDTO)) return false;
-        UserDTO userDTO = (UserDTO) o;
-        return Objects.equals(id, userDTO.id);
+        if (o == null || getClass() != o.getClass()) return false;
+        AdminUserUpdateDTO that = (AdminUserUpdateDTO) o;
+        return Objects.equals(id, that.id) && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(email, that.email) && Objects.equals(indexNumber, that.indexNumber) && Objects.equals(role, that.role);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, password, firstName, lastName, email, indexNumber, role);
+    }
+
+    @Override
+    public String toString() {
+        return "AdminUserUpdateDTO{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", indexNumber='" + indexNumber + '\'' +
+                ", role=" + role +
+                '}';
+    }
 }
